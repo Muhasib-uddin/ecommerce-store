@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Order Confirmation</title>
+    <style>
+        body { font-family: Arial, sans-serif; background-color: #f4f4f4; padding: 20px; }
+        .container { background-color: #ffffff; padding: 20px; border-radius: 5px; max-width: 600px; margin: 0 auto; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        h1 { color: #333333; }
+        p { color: #555555; line-height: 1.6; }
+        .details { margin-top: 20px; background-color: #f9f9f9; padding: 15px; border-radius: 4px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Order Confirmation</h1>
+        <p>Hi {{name}},</p>
+        <p>Thank you for your order! Your order has been successfully placed.</p>
+        <div class="details">
+            <p><strong>Order Number:</strong> {{orderNumber}}</p>
+            <p><strong>Total Amount:</strong> ${{totalAmount}}</p>
+        </div>
+        <p>We will notify you once your order has shipped.</p>
+    </div>
+</body>
+</html>
