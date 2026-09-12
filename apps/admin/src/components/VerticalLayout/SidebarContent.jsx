@@ -257,6 +257,24 @@ const SidebarContent = (props) => {
             </li>
 
             <li>
+              <Link to="/#" className="has-arrow">
+                <i className="bx bx-pulse"></i>
+                <span>{props.t("Customer Activity")}</span>
+              </Link>
+              <ul className="sub-menu" aria-expanded="false">
+                <li>
+                  <Link to="/activity/feed">{props.t("Activity Feed")}</Link>
+                </li>
+                <li>
+                  <Link to="/activity/funnel">{props.t("Conversion Funnel")}</Link>
+                </li>
+                <li>
+                  <Link to="/activity/searches">{props.t("Search Analytics")}</Link>
+                </li>
+              </ul>
+            </li>
+
+            <li>
               <Link to="/settings/system">
                 <i className="bx bx-cog"></i>
                 <span>{props.t("Settings")}</span>

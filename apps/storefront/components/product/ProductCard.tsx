@@ -91,7 +91,7 @@ export default function ProductCard({ product }: ProductCardProps) {
         </div>
 
         {/* Quick Add Button Over Image */}
-        <div className="absolute bottom-3 right-3 opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 z-10">
+        <div className="absolute bottom-2 right-2 sm:bottom-3 sm:right-3 opacity-100 sm:opacity-0 sm:translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 z-10">
           <button
             onClick={handleQuickAdd}
             disabled={isAdding || product.stock === 0}

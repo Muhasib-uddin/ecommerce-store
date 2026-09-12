@@ -285,7 +285,7 @@ export default function Header() {
 
         {/* Mobile Navigation Menu Slider */}
         {isMenuOpen && (
-          <div className="lg:hidden border-t border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 py-4 px-6 space-y-3">
+          <div className="lg:hidden border-t border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 py-4 px-6 space-y-3 animate-in slide-in-from-top-2 fade-in duration-200">
             {navItems.map((item) => (
               <div key={item.id} className="space-y-1">
                 <Link

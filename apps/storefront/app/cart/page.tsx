@@ -67,7 +67,7 @@ export default function CartPage() {
               return (
                 <div
                   key={item.id}
-                  className="flex flex-col sm:flex-row items-start sm:items-center justify-between p-5 border border-zinc-250/70 dark:border-zinc-850 rounded-2xl bg-white dark:bg-zinc-900/10 gap-4"
+                  className="flex flex-col sm:flex-row items-start sm:items-center justify-between p-5 border border-zinc-250/70 dark:border-zinc-800 rounded-2xl bg-white dark:bg-zinc-900/10 gap-4"
                 >
                   <div className="flex items-center gap-4">
                     <div className="relative h-20 w-20 rounded-lg overflow-hidden border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900 flex-shrink-0">
@@ -80,7 +80,7 @@ export default function CartPage() {
                       {item.variant && (
                         <p className="text-xs text-zinc-500 mt-0.5">Option: {item.variant.name}</p>
                       )}
-                      <p className="text-xs text-zinc-450 mt-1 font-mono">SKU: {item.variant?.sku || `PROD-${item.product.id.substring(0, 5)}`}</p>
+                      <p className="text-xs text-zinc-400 mt-1 font-mono">SKU: {item.variant?.sku || `PROD-${item.product.id.substring(0, 5)}`}</p>
                     </div>
                   </div>
 
@@ -90,7 +90,7 @@ export default function CartPage() {
                     <div className="flex items-center border border-zinc-200 dark:border-zinc-800 rounded-full py-1 px-1.5 bg-zinc-50 dark:bg-zinc-900">
                       <button
                         onClick={() => updateQuantity(item.id, item.quantity - 1)}
-                        className="p-1 hover:text-indigo-650 text-zinc-500 disabled:opacity-40"
+                        className="p-1 hover:text-indigo-600 text-zinc-500 disabled:opacity-40"
                         disabled={item.quantity <= 1}
                       >
                         <Minus className="h-4 w-4" />
@@ -100,7 +100,7 @@ export default function CartPage() {
                       </span>
                       <button
                         onClick={() => updateQuantity(item.id, item.quantity + 1)}
-                        className="p-1 hover:text-indigo-650 text-zinc-500"
+                        className="p-1 hover:text-indigo-600 text-zinc-500"
                       >
                         <Plus className="h-4 w-4" />
                       </button>
@@ -128,7 +128,7 @@ export default function CartPage() {
           <div className="lg:col-span-4 space-y-6">
             
             {/* Promo Code Form */}
-            <div className="p-6 rounded-2xl border border-zinc-250/70 bg-white dark:border-zinc-850 dark:bg-zinc-900/10 space-y-4">
+            <div className="p-6 rounded-2xl border border-zinc-250/70 bg-white dark:border-zinc-800 dark:bg-zinc-900/10 space-y-4">
               <h3 className="text-sm font-bold text-zinc-900 dark:text-white uppercase tracking-wider flex items-center gap-2">
                 <Tag className="h-4 w-4 text-indigo-500" />
                 <span>Promo Code</span>
@@ -156,7 +156,7 @@ export default function CartPage() {
                     placeholder="Enter LUMIERE20"
                     value={couponCode}
                     onChange={(e) => setCouponCode(e.target.value)}
-                    className="flex-1 text-sm border border-zinc-200 dark:border-zinc-800 rounded-full px-3.5 py-2 bg-transparent text-zinc-900 dark:text-white focus:outline-none focus:border-indigo-650"
+                    className="flex-1 text-sm border border-zinc-200 dark:border-zinc-800 rounded-full px-3.5 py-2 bg-transparent text-zinc-900 dark:text-white focus:outline-none focus:border-indigo-600"
                   />
                   <button
                     type="submit"
@@ -170,7 +170,7 @@ export default function CartPage() {
             </div>
 
             {/* Calculations and Actions */}
-            <div className="p-6 rounded-2xl border border-zinc-250/70 bg-white dark:border-zinc-850 dark:bg-zinc-900/10 space-y-4">
+            <div className="p-6 rounded-2xl border border-zinc-250/70 bg-white dark:border-zinc-800 dark:bg-zinc-900/10 space-y-4">
               <h3 className="text-sm font-bold text-zinc-900 dark:text-white uppercase tracking-wider">
                 Order Summary
               </h3>
@@ -220,3 +220,4 @@ export default function CartPage() {
     </div>
   );
 }
+

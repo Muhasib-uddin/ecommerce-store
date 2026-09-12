@@ -66,7 +66,7 @@ export default function AddressesPage() {
 
   if (!user) {
     return (
-      <div className="mx-auto max-w-7xl px-4 py-32 text-center text-sm text-zinc-550">
+      <div className="mx-auto max-w-7xl px-4 py-32 text-center text-sm text-zinc-500">
         Syncing account details...
       </div>
     );
@@ -88,14 +88,14 @@ export default function AddressesPage() {
         <aside className="lg:col-span-3 space-y-2 border border-zinc-200 dark:border-zinc-800 p-4 rounded-2xl bg-zinc-50/50 dark:bg-zinc-950/20">
           <Link
             href="/account/profile"
-            className="flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-sm text-zinc-650 hover:bg-zinc-100 dark:text-zinc-400 dark:hover:bg-zinc-900 transition-colors"
+            className="flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-sm text-zinc-600 hover:bg-zinc-100 dark:text-zinc-400 dark:hover:bg-zinc-900 transition-colors"
           >
             <User className="h-4.5 w-4.5" />
             <span>Profile Settings</span>
           </Link>
           <Link
             href="/account/orders"
-            className="flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-sm text-zinc-650 hover:bg-zinc-100 dark:text-zinc-400 dark:hover:bg-zinc-900 transition-colors"
+            className="flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-sm text-zinc-600 hover:bg-zinc-100 dark:text-zinc-400 dark:hover:bg-zinc-900 transition-colors"
           >
             <Package className="h-4.5 w-4.5" />
             <span>Order History</span>
@@ -109,7 +109,7 @@ export default function AddressesPage() {
           </Link>
           <button
             onClick={handleLogout}
-            className="flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-sm text-red-650 hover:bg-red-50 dark:text-red-400 dark:hover:bg-red-950/20 w-full text-left mt-4 border-t border-zinc-200 dark:border-zinc-800 pt-4"
+            className="flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-sm text-red-600 hover:bg-red-50 dark:text-red-400 dark:hover:bg-red-950/20 w-full text-left mt-4 border-t border-zinc-200 dark:border-zinc-800 pt-4"
           >
             <LogOut className="h-4.5 w-4.5" />
             <span>Sign Out</span>
@@ -117,7 +117,7 @@ export default function AddressesPage() {
         </aside>
 
         {/* ADDRESSES PANEL (9 cols) */}
-        <div className="lg:col-span-9 p-8 border border-zinc-250/70 dark:border-zinc-850 rounded-2xl bg-white dark:bg-zinc-950 space-y-6">
+        <div className="lg:col-span-9 p-8 border border-zinc-250/70 dark:border-zinc-800 rounded-2xl bg-white dark:bg-zinc-950 space-y-6">
           <h2 className="text-xl font-bold text-zinc-900 dark:text-white border-b border-zinc-100 dark:border-zinc-900 pb-3">
             Saved Addresses
           </h2>
@@ -134,14 +134,14 @@ export default function AddressesPage() {
             {/* SHIPPING ADDRESS */}
             <div className="border border-zinc-200 dark:border-zinc-800 p-5 rounded-2xl space-y-4">
               <div className="flex items-center justify-between border-b border-zinc-100 dark:border-zinc-900 pb-3">
-                <span className="text-sm font-bold text-zinc-850 dark:text-zinc-200 flex items-center gap-1.5">
+                <span className="text-sm font-bold text-zinc-800 dark:text-zinc-200 flex items-center gap-1.5">
                   <Home className="h-4 w-4 text-indigo-500" />
                   <span>Default Shipping</span>
                 </span>
                 {!isEditingShipping && (
                   <button
                     onClick={() => setIsEditingShipping(true)}
-                    className="text-xs text-indigo-650 dark:text-indigo-400 hover:underline flex items-center gap-1 font-semibold"
+                    className="text-xs text-indigo-600 dark:text-indigo-400 hover:underline flex items-center gap-1 font-semibold"
                   >
                     <Edit className="h-3 w-3" />
                     <span>Edit</span>
@@ -218,7 +218,7 @@ export default function AddressesPage() {
                     {shippingAddress.city}, {shippingAddress.state} {shippingAddress.postalCode}
                   </p>
                   <p>{shippingAddress.country}</p>
-                  <p className="mt-2 text-xs text-zinc-450">Phone: {shippingAddress.phone}</p>
+                  <p className="mt-2 text-xs text-zinc-400">Phone: {shippingAddress.phone}</p>
                 </div>
               )}
             </div>
@@ -226,14 +226,14 @@ export default function AddressesPage() {
             {/* BILLING ADDRESS */}
             <div className="border border-zinc-200 dark:border-zinc-800 p-5 rounded-2xl space-y-4">
               <div className="flex items-center justify-between border-b border-zinc-100 dark:border-zinc-900 pb-3">
-                <span className="text-sm font-bold text-zinc-850 dark:text-zinc-200 flex items-center gap-1.5">
+                <span className="text-sm font-bold text-zinc-800 dark:text-zinc-200 flex items-center gap-1.5">
                   <Home className="h-4 w-4 text-indigo-500" />
                   <span>Default Billing</span>
                 </span>
                 {!isEditingBilling && (
                   <button
                     onClick={() => setIsEditingBilling(true)}
-                    className="text-xs text-indigo-650 dark:text-indigo-400 hover:underline flex items-center gap-1 font-semibold"
+                    className="text-xs text-indigo-600 dark:text-indigo-400 hover:underline flex items-center gap-1 font-semibold"
                   >
                     <Edit className="h-3 w-3" />
                     <span>Edit</span>
@@ -310,7 +310,7 @@ export default function AddressesPage() {
                     {billingAddress.city}, {billingAddress.state} {billingAddress.postalCode}
                   </p>
                   <p>{billingAddress.country}</p>
-                  <p className="mt-2 text-xs text-zinc-450">Phone: {billingAddress.phone}</p>
+                  <p className="mt-2 text-xs text-zinc-400">Phone: {billingAddress.phone}</p>
                 </div>
               )}
             </div>
@@ -321,3 +321,4 @@ export default function AddressesPage() {
     </div>
   );
 }
+

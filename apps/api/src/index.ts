@@ -19,11 +19,15 @@ import uploadRoutes from './routes/upload.routes.js';
 import webhookRoutes from './routes/webhook.routes.js';
 import paymentRoutes from './routes/payment.routes.js';
 import dashboardRoutes from './routes/dashboard.routes.js';
+import activityRoutes from './routes/activity.routes.js';
 import { webhookHandler as stripeWebhookHandler } from './controllers/payment.controller.js';
 import { globalErrorHandler } from './middleware/errorHandler.js';
 import { initCronJobs } from './jobs/index.js';
-
-dotenv.config();
+const nodeEnv = process.env.NODE_ENV || 'development';
+dotenv.config({ path: path.resolve(process.cwd(), `.env.${nodeEnv}`) });
+dotenv.config({ path: path.resolve(process.cwd(), '.env') });
+dotenv.config({ path: path.resolve(process.cwd(), `../../.env.${nodeEnv}`) });
+dotenv.config({ path: path.resolve(process.cwd(), '../../.env') });
 
 const app = express();
 const port = process.env.PORT || 5000;
@@ -68,6 +72,7 @@ app.use('/api/v1/uploads', uploadRoutes);
 app.use('/api/v1/webhooks', webhookRoutes);
 app.use('/api/v1/payments', paymentRoutes);
 app.use('/api/v1/dashboard', dashboardRoutes);
+app.use('/api/v1/activities', activityRoutes);
 
 // Global error handler (must be last)
 app.use(globalErrorHandler);

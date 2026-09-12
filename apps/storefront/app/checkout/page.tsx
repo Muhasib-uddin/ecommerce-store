@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import { CheckCircle2, ChevronRight, Lock, MapPin, CreditCard, ShoppingBag, Gift, ArrowRight } from "lucide-react";
 import { useCart } from "@/hooks/useCart";
 import { useAuth } from "@/hooks/useAuth";
+import { useActivityTracker } from "@/hooks/useActivityTracker";
 import { api } from "@/lib/api";
 import PaymentProviders from "@/components/checkout/PaymentProviders";
 import StripeCheckoutForm from "@/components/checkout/StripeCheckoutForm";
@@ -31,8 +32,23 @@ export default function CheckoutPage() {
   const router = useRouter();
   const { items, getTotals, sessionId, clearCart } = useCart();
   const { user, isAuthenticated } = useAuth();
+  const { track } = useActivityTracker();
   
   const { subtotal, tax, shipping, total } = getTotals();
+
+  // Track checkout initiation once items are present
+  useEffect(() => {
+    if (items.length > 0) {
+      track({
+        type: "INITIATE_CHECKOUT",
+        metadata: {
+          itemCount: items.length,
+          subtotal,
+          total,
+        },
+      });
+    }
+  }, [items.length, track]);
 
   // Steps Wizard State
   const [currentStep, setCurrentStep] = useState<CheckoutStep>("contact");
@@ -267,7 +283,7 @@ export default function CheckoutPage() {
         {placedOrderDetails && (
           <div className="p-6 rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900/10 text-left text-sm space-y-3">
             <div className="flex justify-between">
-              <span className="text-zinc-450">Order Number:</span>
+              <span className="text-zinc-400">Order Number:</span>
               <span className="font-bold text-zinc-900 dark:text-zinc-150">{placedOrderDetails.orderNumber}</span>
             </div>
             <div className="flex justify-between">
@@ -358,7 +374,7 @@ export default function CheckoutPage() {
             {currentStep === "contact" && (
               <div className="p-6 space-y-4">
                 <div>
-                  <label className="block text-sm font-semibold text-zinc-650 dark:text-zinc-400 mb-1">
+                  <label className="block text-sm font-semibold text-zinc-600 dark:text-zinc-400 mb-1">
                     Email Address
                   </label>
                   <input
@@ -367,9 +383,9 @@ export default function CheckoutPage() {
                     placeholder="you@domain.com"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    className="w-full text-sm border border-zinc-200 dark:border-zinc-800 rounded-xl p-3 bg-transparent text-zinc-900 dark:text-white focus:outline-none focus:border-indigo-650"
+                    className="w-full text-sm border border-zinc-200 dark:border-zinc-800 rounded-xl p-3 bg-transparent text-zinc-900 dark:text-white focus:outline-none focus:border-indigo-600"
                   />
-                  {errors.email && <p className="text-xs text-red-650 mt-1 font-semibold">{errors.email}</p>}
+                  {errors.email && <p className="text-xs text-red-600 mt-1 font-semibold">{errors.email}</p>}
                 </div>
                 <button
                   onClick={() => handleNextStep("shipping")}
@@ -415,7 +431,7 @@ export default function CheckoutPage() {
                       onChange={(e) => setShippingAddress({ ...shippingAddress, firstName: e.target.value })}
                       className="w-full text-sm border border-zinc-200 dark:border-zinc-800 rounded-xl p-3 bg-transparent text-zinc-900 dark:text-white"
                     />
-                    {errors.ship_firstName && <p className="text-[11px] text-red-650 mt-1 font-semibold">{errors.ship_firstName}</p>}
+                    {errors.ship_firstName && <p className="text-[11px] text-red-600 mt-1 font-semibold">{errors.ship_firstName}</p>}
                   </div>
                   <div>
                     <label className="block text-xs font-bold uppercase tracking-wider text-zinc-400 mb-1">Last Name</label>
@@ -426,7 +442,7 @@ export default function CheckoutPage() {
                       onChange={(e) => setShippingAddress({ ...shippingAddress, lastName: e.target.value })}
                       className="w-full text-sm border border-zinc-200 dark:border-zinc-800 rounded-xl p-3 bg-transparent text-zinc-900 dark:text-white"
                     />
-                    {errors.ship_lastName && <p className="text-[11px] text-red-650 mt-1 font-semibold">{errors.ship_lastName}</p>}
+                    {errors.ship_lastName && <p className="text-[11px] text-red-600 mt-1 font-semibold">{errors.ship_lastName}</p>}
                   </div>
                 </div>
 
@@ -440,7 +456,7 @@ export default function CheckoutPage() {
                     onChange={(e) => setShippingAddress({ ...shippingAddress, address1: e.target.value })}
                     className="w-full text-sm border border-zinc-200 dark:border-zinc-800 rounded-xl p-3 bg-transparent text-zinc-900 dark:text-white"
                   />
-                  {errors.ship_address1 && <p className="text-[11px] text-red-650 mt-1 font-semibold">{errors.ship_address1}</p>}
+                  {errors.ship_address1 && <p className="text-[11px] text-red-600 mt-1 font-semibold">{errors.ship_address1}</p>}
                 </div>
 
                 <div>
@@ -489,7 +505,7 @@ export default function CheckoutPage() {
                       onChange={(e) => setShippingAddress({ ...shippingAddress, postalCode: e.target.value })}
                       className="w-full text-sm border border-zinc-200 dark:border-zinc-800 rounded-xl p-3 bg-transparent text-zinc-900 dark:text-white"
                     />
-                    {errors.ship_postalCode && <p className="text-[11px] text-red-650 mt-1 font-semibold">{errors.ship_postalCode}</p>}
+                    {errors.ship_postalCode && <p className="text-[11px] text-red-600 mt-1 font-semibold">{errors.ship_postalCode}</p>}
                   </div>
                   <div>
                     <label className="block text-xs font-bold uppercase tracking-wider text-zinc-400 mb-1">Phone Number</label>
@@ -501,17 +517,17 @@ export default function CheckoutPage() {
                       onChange={(e) => setShippingAddress({ ...shippingAddress, phone: e.target.value })}
                       className="w-full text-sm border border-zinc-200 dark:border-zinc-800 rounded-xl p-3 bg-transparent text-zinc-900 dark:text-white"
                     />
-                    {errors.ship_phone && <p className="text-[11px] text-red-650 mt-1 font-semibold">{errors.ship_phone}</p>}
+                    {errors.ship_phone && <p className="text-[11px] text-red-600 mt-1 font-semibold">{errors.ship_phone}</p>}
                   </div>
                 </div>
 
                 <div className="pt-2">
-                  <label className="flex items-center gap-2 text-sm text-zinc-650 dark:text-zinc-400 cursor-pointer">
+                  <label className="flex items-center gap-2 text-sm text-zinc-600 dark:text-zinc-400 cursor-pointer">
                     <input
                       type="checkbox"
                       checked={sameAsShipping}
                       onChange={(e) => setSameAsShipping(e.target.checked)}
-                      className="rounded border-zinc-300 dark:border-zinc-700 text-indigo-650 focus:ring-indigo-500 h-4.5 w-4.5"
+                      className="rounded border-zinc-300 dark:border-zinc-700 text-indigo-600 focus:ring-indigo-500 h-4.5 w-4.5"
                     />
                     <span>Billing address is same as shipping</span>
                   </label>
@@ -570,7 +586,7 @@ export default function CheckoutPage() {
                         onChange={(e) => setBillingAddress({ ...billingAddress, lastName: e.target.value })}
                         className="w-full text-sm border border-zinc-200 dark:border-zinc-800 rounded-xl p-3 bg-transparent text-zinc-900 dark:text-white"
                       />
-                      {errors.bill_lastName && <p className="text-xs text-red-650 mt-1 font-semibold">{errors.bill_lastName}</p>}
+                      {errors.bill_lastName && <p className="text-xs text-red-600 mt-1 font-semibold">{errors.bill_lastName}</p>}
                     </div>
                   </div>
 
@@ -620,7 +636,7 @@ export default function CheckoutPage() {
                       onChange={(e) => setBillingAddress({ ...billingAddress, postalCode: e.target.value })}
                       className="w-full text-sm border border-zinc-200 dark:border-zinc-800 rounded-xl p-3 bg-transparent text-zinc-900 dark:text-white"
                     />
-                    {errors.bill_postalCode && <p className="text-xs text-red-650 mt-1 font-semibold">{errors.bill_postalCode}</p>}
+                    {errors.bill_postalCode && <p className="text-xs text-red-600 mt-1 font-semibold">{errors.bill_postalCode}</p>}
                   </div>
 
                   <button
@@ -740,7 +756,7 @@ export default function CheckoutPage() {
             <div className="w-full flex items-center justify-between p-5 text-left border-b border-zinc-100 dark:border-zinc-900 bg-zinc-50/50 dark:bg-zinc-950/20">
               <div className="flex items-center gap-3">
                 <span className={`h-6 w-6 rounded-full flex items-center justify-center text-xs font-bold ${
-                  currentStep === "review" ? "bg-indigo-600 text-white" : "bg-zinc-300 text-zinc-650"
+                  currentStep === "review" ? "bg-indigo-600 text-white" : "bg-zinc-300 text-zinc-600"
                 }`}>
                   {sameAsShipping ? "4" : "5"}
                 </span>
@@ -757,20 +773,20 @@ export default function CheckoutPage() {
                 {/* Split summary review */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 text-sm">
                   <div className="space-y-1.5 border border-zinc-100 dark:border-zinc-900 p-4 rounded-xl">
-                    <h4 className="font-bold text-zinc-850 dark:text-zinc-200">Contact Email</h4>
+                    <h4 className="font-bold text-zinc-800 dark:text-zinc-200">Contact Email</h4>
                     <p className="text-zinc-600 dark:text-zinc-400">{email}</p>
                   </div>
 
                   <div className="space-y-1.5 border border-zinc-100 dark:border-zinc-900 p-4 rounded-xl">
-                    <h4 className="font-bold text-zinc-850 dark:text-zinc-200">Payment Option</h4>
+                    <h4 className="font-bold text-zinc-800 dark:text-zinc-200">Payment Option</h4>
                     <p className="text-zinc-600 dark:text-zinc-400 font-semibold">
                       {paymentMethod === "STRIPE" ? "Credit Card (Stripe)" : paymentMethod === "PAYPAL" ? "PayPal" : paymentMethod === "COD" ? "Cash on Delivery" : "Bank Transfer"}
                     </p>
                   </div>
 
                   <div className="space-y-1.5 border border-zinc-100 dark:border-zinc-900 p-4 rounded-xl sm:col-span-2">
-                    <h4 className="font-bold text-zinc-850 dark:text-zinc-200">Shipping coordinates</h4>
-                    <p className="text-zinc-600 dark:text-zinc-450 leading-relaxed">
+                    <h4 className="font-bold text-zinc-800 dark:text-zinc-200">Shipping coordinates</h4>
+                    <p className="text-zinc-600 dark:text-zinc-400 leading-relaxed">
                       {shippingAddress.firstName} {shippingAddress.lastName}<br />
                       {shippingAddress.address1} {shippingAddress.address2 && `, ${shippingAddress.address2}`}<br />
                       {shippingAddress.city}, {shippingAddress.state} {shippingAddress.postalCode}<br />
@@ -783,7 +799,7 @@ export default function CheckoutPage() {
                 <button
                   onClick={handlePlaceOrder}
                   disabled={isPlacingOrder}
-                  className="flex items-center justify-center gap-2 w-full py-4 bg-emerald-650 hover:bg-emerald-700 text-white font-semibold rounded-full shadow-lg shadow-emerald-950/20 disabled:bg-zinc-450"
+                  className="flex items-center justify-center gap-2 w-full py-4 bg-emerald-600 hover:bg-emerald-700 text-white font-semibold rounded-full shadow-lg shadow-emerald-950/20 disabled:bg-zinc-400"
                 >
                   <span>{isPlacingOrder ? "Verifying Purchase..." : "Confirm & Place Order"}</span>
                   <CheckCircle2 className="h-4.5 w-4.5" />
@@ -802,14 +818,14 @@ export default function CheckoutPage() {
           </h3>
 
           {/* Cart Item rows */}
-          <div className="space-y-4 max-h-60 overflow-y-auto border-b border-zinc-200 dark:border-zinc-850 pb-4">
+          <div className="space-y-4 max-h-60 overflow-y-auto border-b border-zinc-200 dark:border-zinc-800 pb-4">
             {items.map((item) => {
               const price = item.variant ? Number(item.variant.price) : Number(item.product.price);
               return (
                 <div key={item.id} className="flex justify-between items-center text-xs">
                   <div className="flex-1 pr-4">
                     <p className="font-bold text-zinc-800 dark:text-zinc-200 line-clamp-1">{item.product.name}</p>
-                    <p className="text-[10px] text-zinc-450 mt-0.5">
+                    <p className="text-[10px] text-zinc-400 mt-0.5">
                       {item.variant ? `Option: ${item.variant.name}` : `Qty: ${item.quantity}`} {item.variant && `| Qty: ${item.quantity}`}
                     </p>
                   </div>
@@ -837,7 +853,7 @@ export default function CheckoutPage() {
               <span>Sales Tax (8%)</span>
               <span className="font-semibold text-zinc-800 dark:text-zinc-200">${tax.toFixed(2)}</span>
             </div>
-            <div className="flex justify-between text-sm font-bold text-zinc-900 dark:text-white pt-3 border-t border-zinc-200 dark:border-zinc-850">
+            <div className="flex justify-between text-sm font-bold text-zinc-900 dark:text-white pt-3 border-t border-zinc-200 dark:border-zinc-800">
               <span>Total</span>
               <span className="text-base">${total.toFixed(2)}</span>
             </div>
@@ -848,3 +864,4 @@ export default function CheckoutPage() {
     </div>
   );
 }
+

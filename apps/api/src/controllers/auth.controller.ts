@@ -16,6 +16,7 @@ import {
   sendPasswordResetEmail,
   sendEmailVerificationEmail,
 } from '../services/email.service.js';
+import { activityService } from '../services/activity.service.js';
 
 // ============================================================
 // Cookie configuration
@@ -132,6 +133,17 @@ export const register = async (
     // Set cookies
     setAuthCookies(res, accessToken, refreshToken);
 
+    activityService.trackActivity({
+      type: 'REGISTRATION',
+      userId: user.id,
+      metadata: {
+        email: user.email,
+        role: user.role,
+      },
+      ipAddress: (req.headers['x-forwarded-for'] as string)?.split(',')[0]?.trim() || req.socket.remoteAddress || null,
+      userAgent: req.headers['user-agent'] || null,
+    });
+
     res.status(201).json({
       success: true,
       data: {
@@ -206,6 +218,18 @@ export const login = async (
 
     // Set cookies
     setAuthCookies(res, accessToken, refreshToken);
+
+    activityService.trackActivity({
+      type: 'LOGIN',
+      userId: user.id,
+      metadata: {
+        email: user.email,
+        role: user.role,
+        method: 'password',
+      },
+      ipAddress: (req.headers['x-forwarded-for'] as string)?.split(',')[0]?.trim() || req.socket.remoteAddress || null,
+      userAgent: req.headers['user-agent'] || null,
+    });
 
     res.json({
       success: true,
@@ -484,11 +508,18 @@ export const refreshToken = async (
  * Clear auth cookies.
  */
 export const logout = async (
-  _req: Request,
+  req: Request,
   res: Response,
   next: NextFunction
 ): Promise<void> => {
   try {
+    activityService.trackActivity({
+      type: 'LOGOUT',
+      userId: req.user?.id || null,
+      ipAddress: (req.headers['x-forwarded-for'] as string)?.split(',')[0]?.trim() || req.socket.remoteAddress || null,
+      userAgent: req.headers['user-agent'] || null,
+    });
+
     res.clearCookie('access_token', { ...cookieOptions });
     res.clearCookie('refresh_token', { ...cookieOptions });
 

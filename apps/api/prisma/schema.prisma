@@ -49,6 +49,7 @@ model User {
   reviews            Review[]
   auditLogs          AuditLog[]
   apiKeys            ApiKey[]
+  customerActivities CustomerActivity[]
 
   @@index([email])
   @@index([passwordResetToken])
@@ -95,9 +96,10 @@ model Category {
   updatedAt      DateTime   @updatedAt
 
   // Relations
-  parent         Category?   @relation("CategoryToCategory", fields: [parentId], references: [id], onDelete: SetNull)
-  children       Category[]  @relation("CategoryToCategory")
-  products       Product[]
+  parent             Category?          @relation("CategoryToCategory", fields: [parentId], references: [id], onDelete: SetNull)
+  children           Category[]         @relation("CategoryToCategory")
+  products           Product[]
+  customerActivities CustomerActivity[]
 
   @@index([parentId])
   @@index([slug])
@@ -125,14 +127,15 @@ model Product {
   updatedAt        DateTime         @updatedAt
 
   // Relations
-  category         Category?        @relation(fields: [categoryId], references: [id], onDelete: SetNull)
-  images           ProductImage[]
-  variants         ProductVariant[]
-  tags             ProductTag[]
-  reviews          Review[]
-  orderItems       OrderItem[]
-  cartItems        CartItem[]
-  flashSales       FlashSaleProduct[]
+  category           Category?          @relation(fields: [categoryId], references: [id], onDelete: SetNull)
+  images             ProductImage[]
+  variants           ProductVariant[]
+  tags               ProductTag[]
+  reviews            Review[]
+  orderItems         OrderItem[]
+  cartItems          CartItem[]
+  flashSales         FlashSaleProduct[]
+  customerActivities CustomerActivity[]
 
   @@index([categoryId])
   @@index([slug])
@@ -288,6 +291,7 @@ model Order {
   user               User?                @relation(fields: [userId], references: [id], onDelete: SetNull)
   items              OrderItem[]
   statusHistory      OrderStatusHistory[]
+  customerActivities CustomerActivity[]
 
   @@index([userId])
   @@index([orderNumber])
@@ -587,3 +591,59 @@ model ApiKey {
   @@index([userId])
   @@index([keyHash])
 }
+
+// ==========================================
+// 10. CUSTOMER ACTIVITY TRACKING
+// ==========================================
+
+enum CustomerActivityType {
+  PAGE_VIEW
+  PRODUCT_VIEW
+  SEARCH
+  ADD_TO_CART
+  REMOVE_FROM_CART
+  UPDATE_CART
+  INITIATE_CHECKOUT
+  PURCHASE
+  REGISTRATION
+  LOGIN
+  LOGOUT
+  REVIEW_SUBMITTED
+  WISHLIST_ADD
+  WISHLIST_REMOVE
+  COUPON_APPLIED
+  COUPON_REMOVED
+}
+
+model CustomerActivity {
+  id          String               @id @default(uuid())
+  type        CustomerActivityType
+  userId      String?
+  sessionId   String?              // For guest tracking
+  productId   String?
+  categoryId  String?
+  orderId     String?
+  searchQuery String?
+  metadata    Json?                // Flexible: { variantId, quantity, couponCode, pageUrl, referrer, ... }
+  ipAddress   String?
+  userAgent   String?
+  duration    Int?                 // Time on page in seconds
+  createdAt   DateTime             @default(now())
+
+  // Relations
+  user        User?                @relation(fields: [userId], references: [id], onDelete: SetNull)
+  product     Product?             @relation(fields: [productId], references: [id], onDelete: SetNull)
+  category    Category?            @relation(fields: [categoryId], references: [id], onDelete: SetNull)
+  order       Order?               @relation(fields: [orderId], references: [id], onDelete: SetNull)
+
+  @@index([userId])
+  @@index([productId])
+  @@index([categoryId])
+  @@index([orderId])
+  @@index([sessionId])
+  @@index([type])
+  @@index([createdAt])
+  @@index([type, createdAt])
+  @@index([userId, createdAt])
+}
+

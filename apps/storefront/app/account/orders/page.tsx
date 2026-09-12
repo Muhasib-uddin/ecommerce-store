@@ -122,7 +122,7 @@ export default function OrdersPage() {
 
   if (!user) {
     return (
-      <div className="mx-auto max-w-7xl px-4 py-32 text-center text-sm text-zinc-550">
+      <div className="mx-auto max-w-7xl px-4 py-32 text-center text-sm text-zinc-500">
         Syncing account details...
       </div>
     );
@@ -144,7 +144,7 @@ export default function OrdersPage() {
         <aside className="lg:col-span-3 space-y-2 border border-zinc-200 dark:border-zinc-800 p-4 rounded-2xl bg-zinc-50/50 dark:bg-zinc-950/20">
           <Link
             href="/account/profile"
-            className="flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-sm text-zinc-650 hover:bg-zinc-100 dark:text-zinc-400 dark:hover:bg-zinc-900 transition-colors"
+            className="flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-sm text-zinc-600 hover:bg-zinc-100 dark:text-zinc-400 dark:hover:bg-zinc-900 transition-colors"
           >
             <User className="h-4.5 w-4.5" />
             <span>Profile Settings</span>
@@ -158,14 +158,14 @@ export default function OrdersPage() {
           </Link>
           <Link
             href="/account/addresses"
-            className="flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-sm text-zinc-650 hover:bg-zinc-100 dark:text-zinc-400 dark:hover:bg-zinc-900 transition-colors"
+            className="flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-sm text-zinc-600 hover:bg-zinc-100 dark:text-zinc-400 dark:hover:bg-zinc-900 transition-colors"
           >
             <MapPin className="h-4.5 w-4.5" />
             <span>Saved Addresses</span>
           </Link>
           <button
             onClick={handleLogout}
-            className="flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-sm text-red-650 hover:bg-red-50 dark:text-red-400 dark:hover:bg-red-950/20 w-full text-left mt-4 border-t border-zinc-200 dark:border-zinc-800 pt-4"
+            className="flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-sm text-red-600 hover:bg-red-50 dark:text-red-400 dark:hover:bg-red-950/20 w-full text-left mt-4 border-t border-zinc-200 dark:border-zinc-800 pt-4"
           >
             <LogOut className="h-4.5 w-4.5" />
             <span>Sign Out</span>
@@ -173,13 +173,13 @@ export default function OrdersPage() {
         </aside>
 
         {/* ORDER HISTORY LIST PANEL (9 cols) */}
-        <div className="lg:col-span-9 p-8 border border-zinc-250/70 dark:border-zinc-850 rounded-2xl bg-white dark:bg-zinc-950 space-y-6">
+        <div className="lg:col-span-9 p-8 border border-zinc-250/70 dark:border-zinc-800 rounded-2xl bg-white dark:bg-zinc-950 space-y-6">
           <h2 className="text-xl font-bold text-zinc-900 dark:text-white border-b border-zinc-100 dark:border-zinc-900 pb-3">
             Order History
           </h2>
 
           {isLoading ? (
-            <div className="text-center py-10 text-sm text-zinc-450 animate-pulse">
+            <div className="text-center py-10 text-sm text-zinc-400 animate-pulse">
               Syncing transaction receipts database...
             </div>
           ) : orders.length === 0 ? (
@@ -205,7 +205,7 @@ export default function OrdersPage() {
                 return (
                   <div
                     key={order.id}
-                    className="border border-zinc-200 dark:border-zinc-850 rounded-2xl overflow-hidden bg-zinc-50/20 dark:bg-zinc-950/20"
+                    className="border border-zinc-200 dark:border-zinc-800 rounded-2xl overflow-hidden bg-zinc-50/20 dark:bg-zinc-950/20"
                   >
                     {/* Header bar summary */}
                     <div
@@ -245,7 +245,7 @@ export default function OrdersPage() {
 
                     {/* Detailed Accordion Content */}
                     {isExpanded && (
-                      <div className="p-6 border-t border-zinc-200 dark:border-zinc-850 bg-white dark:bg-zinc-950 space-y-6">
+                      <div className="p-6 border-t border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 space-y-6">
                         
                         {/* STEPPER STATUS GRAPHICS */}
                         <div className="space-y-4">
@@ -269,7 +269,7 @@ export default function OrdersPage() {
                                   {/* Circle node */}
                                   <div className={`h-6.5 w-6.5 rounded-full flex items-center justify-center text-[10px] font-bold border-2 transition-all ${
                                     isCompleted
-                                      ? "bg-indigo-600 border-indigo-650 text-white"
+                                      ? "bg-indigo-600 border-indigo-600 text-white"
                                       : "bg-white dark:bg-zinc-950 border-zinc-200 dark:border-zinc-800 text-zinc-400"
                                   } ${isActive ? "ring-4 ring-indigo-500/15" : ""}`}>
                                     {idx + 1}
@@ -309,7 +309,7 @@ export default function OrdersPage() {
                         </div>
 
                         {/* SHIPPING DETAILS SUB BLOCK */}
-                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 pt-6 border-t border-zinc-100 dark:border-zinc-900 text-xs leading-relaxed text-zinc-650 dark:text-zinc-400">
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 pt-6 border-t border-zinc-100 dark:border-zinc-900 text-xs leading-relaxed text-zinc-600 dark:text-zinc-400">
                           <div>
                             <h4 className="font-bold text-zinc-800 dark:text-zinc-200 uppercase mb-1.5">Shipping Coordinate</h4>
                             <p>
@@ -340,3 +340,4 @@ export default function OrdersPage() {
     </div>
   );
 }
+

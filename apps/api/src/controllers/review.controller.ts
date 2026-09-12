@@ -1,6 +1,7 @@
 import { Request, Response, NextFunction } from 'express';
 import prisma from '../lib/prisma.js';
 import { AppError } from '../middleware/errorHandler.js';
+import { activityService } from '../services/activity.service.js';
 
 /**
  * POST /api/v1/reviews
@@ -55,10 +56,25 @@ export const submitReview = async (
       },
     });
 
+    activityService.trackActivity({
+      type: 'REVIEW_SUBMITTED',
+      userId,
+      productId,
+      metadata: {
+        reviewId: review.id,
+        rating,
+        title: title || null,
+      },
+      ipAddress: (req.headers['x-forwarded-for'] as string)?.split(',')[0]?.trim() || req.socket.remoteAddress || null,
+      userAgent: req.headers['user-agent'] || null,
+    });
+
     res.status(201).json({
       success: true,
       message: 'Review submitted. It will be visible once approved.',
-      data: { review },
+      data: {
+        review,
+      },
     });
   } catch (error) {
     next(error);

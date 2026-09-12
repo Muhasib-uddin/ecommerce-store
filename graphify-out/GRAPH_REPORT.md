@@ -1,13 +1,18 @@
-# Graph Report - ecommerce-store  (2026-08-31)
+# Graph Report - ecommerce-store  (2026-09-12)
 
 ## Corpus Check
-- 554 files · ~1,042,021 words
+- 568 files · ~1,053,833 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 2947 nodes · 5481 edges · 374 communities (140 shown, 234 thin omitted)
-- Extraction: 94% EXTRACTED · 6% INFERRED · 0% AMBIGUOUS · INFERRED: 308 edges (avg confidence: 0.67)
+- 3034 nodes · 5671 edges · 383 communities (146 shown, 237 thin omitted)
+- Extraction: 94% EXTRACTED · 6% INFERRED · 0% AMBIGUOUS · INFERRED: 319 edges (avg confidence: 0.68)
 - Token cost: 0 input · 0 output
+
+## Graph Freshness
+- Built from commit: `3a20c0dd`
+- Run `git rev-parse HEAD` and compare to check if the graph is stale.
+- Run `graphify update .` after code changes (no API cost).
 
 ## Community Hubs (Navigation)
 - routes/index.jsx
@@ -29,12 +34,12 @@
 - getChartColorsArray
 - cms.routes.ts
 - api.ts
-- email-inbox.jsx
+- EcommerceOrders/index.jsx
 - layout/saga.js
 - ReCharts.jsx
-- AppError
+- review.routes.ts
 - Admin Authentication & Profiles
-- Storefront Client Application (24)
+- Dashboard-Blog/index.jsx
 - useBranding
 - post
 - UiButtons/index.jsx
@@ -42,40 +47,40 @@
 - Header.tsx
 - useNavigation.ts
 - contacts/actions.js
-- useSettings.ts
+- useSettings
 - dependencies
 - promotion.routes.ts
 - cart.routes.ts
 - tasks
-- contacts/saga.js
+- invoices-detail.jsx
 - invoices/actions.js
-- Admin Analytics & Dashboards
+- register/saga.js
 - Admin UI & Modules (40)
-- changeBodyAttribute
+- FirebaseAuthBackend
 - dashboard-saas/saga.js
-- api/src/index.ts
+- payment.controller.ts
 - checkout/page.tsx
 - dependencies
 - forgetpwd/saga.js
-- ChartsDynamicColor.jsx
+- Dashboard/index.jsx
 - VerticalLayout/Header.jsx
 - profile/saga.js
 - devDependencies
 - auth.ts
 - dependencies
 - layout.tsx
-- EChart.jsx
+- reducers.js
 - FormAdvanced/index.jsx
 - order.routes.ts
 - devDependencies
-- prisma.ts
+- customer.routes.ts
 - devDependencies
-- security.ts
+- SystemSettings.jsx
 - product.routes.ts
 - compilerOptions
 - compilerOptions
+- dashboard/saga.js
 - sagas.js
-- reducers.js
 - webhook.routes.ts
 - compilerOptions
 - package.json
@@ -88,9 +93,9 @@
 - react-library.json
 - UiDropdown/index.jsx
 - shared/package.json
-- RightSidebar.jsx
-- customer.routes.ts
-- changeLeftSidebarType
+- activity.routes.ts
+- api/src/index.ts
+- prisma.ts
 - onAddNewCustomer
 - LanguageDropdown.jsx
 - bootstrap
@@ -106,15 +111,15 @@
 - BlogGrid/index.jsx
 - @ckeditor/ckeditor5-build-classic
 - @fullcalendar/react
-- crypto.js
+- useSettings.ts
 - file-manager.js
 - EcommerceAddProduct.jsx
 - FileManager/index.jsx
 - scripts
 - shared/tsconfig.json
-- projects.js
+- 🚀 100% Free Tier ($0/Month) Deployment & CI/CD Guide
 - tasks.js
-- Reviews.jsx
+- App.jsx
 - api/package.json
 - payment.validators.ts
 - react-i18next
@@ -124,7 +129,7 @@
 - Turborepo Monorepo Architecture
 - RightBar.jsx
 - dashboard-saas.js
-- serviceWorker.jsx
+- dashboard-crypto.js
 - base.js
 - demo.jsx
 - simplebar-react
@@ -133,7 +138,7 @@
 - makeData.jsx
 - UiCarousel.jsx
 - product/index.js
-- StackedColumnChart.jsx
+- CustomerActivityFeed.jsx
 - AreaChartToast.jsx
 - BarChartToast.jsx
 - BoxPlotChart.jsx
@@ -148,7 +153,7 @@
 - ScatterChartToast.jsx
 - TreeMapChart.jsx
 - onAddReply
-- Storage.jsx
+- Reviews.jsx
 - helmet
 - seed.ts
 - node-cron
@@ -156,12 +161,12 @@
 - npx script
 - docker-compose.yml
 - apexcharts
-- @paypal/checkout-server-sdk
+- dashboard-job.js
 - axios-mock-adapter
 - chart.js
 - @ckeditor/ckeditor5-react
 - classnames
-- stripe
+- FormUpload.jsx
 - echarts
 - echarts-for-react
 - emoji-picker-react
@@ -196,20 +201,24 @@
 - react-jvectormap
 - react-modal-video
 - react-number-format
+- PopupManager.jsx
 - react-responsive-masonry
 - react-router-dom
 - react-select
 - react-simple-star-rating
+- dashboard.js
 - react-table
 - react-toastify
 - reactstrap
 - recharts
 - redux
 - redux-saga
+- EcommerceCheckout.jsx
 - styled-components
 - swiper
 - @tanstack/match-sorter-utils
 - @testing-library/jest-dom
+- UINotifications.jsx
 - @testing-library/user-event
 - @tinymce/tinymce-react
 - toastr
@@ -217,7 +226,11 @@
 - yet-another-react-lightbox
 - yup
 - Menu.jsx
+- Calendar/index.jsx
+- pages-maintenance.jsx
 - jsonwebtoken
+- test-email.ts
+- cookie-parser
 - eslint.config.mjs
 - postcss.config.mjs
 - corepack
@@ -345,12 +358,13 @@
 - next.svg Image Asset
 - vercel.svg Image Asset
 - window.svg Image Asset
+- cors
 
 ## God Nodes (most connected - your core abstractions)
-1. `Breadcrumb()` - 82 edges
+1. `Breadcrumb()` - 85 edges
 2. `getChartColorsArray()` - 71 edges
-3. `useBranding()` - 51 edges
-4. `get()` - 48 edges
+3. `get()` - 54 edges
+4. `useBranding()` - 51 edges
 5. `post()` - 43 edges
 6. `useCurrency()` - 27 edges
 7. `useSettings` - 26 edges
@@ -363,21 +377,21 @@
   apps/admin/src/helpers/real_backend_helper.jsx → apps/admin/src/helpers/api_helper.jsx
 - `realGetProfile()` --calls--> `get()`  [EXTRACTED]
   apps/admin/src/helpers/real_backend_helper.jsx → apps/admin/src/helpers/api_helper.jsx
-- `onGetCategories()` --indirect_call--> `getCategories()`  [INFERRED]
-  apps/admin/src/store/calendar/saga.js → apps/admin/src/helpers/fakebackend_helper.jsx
 - `fetchOrders()` --indirect_call--> `getOrders()`  [INFERRED]
   apps/admin/src/store/e-commerce/saga.js → apps/admin/src/helpers/fakebackend_helper.jsx
 - `fetchCartData()` --indirect_call--> `getCartData()`  [INFERRED]
+  apps/admin/src/store/e-commerce/saga.js → apps/admin/src/helpers/fakebackend_helper.jsx
+- `fetchCustomers()` --indirect_call--> `getCustomers()`  [INFERRED]
   apps/admin/src/store/e-commerce/saga.js → apps/admin/src/helpers/fakebackend_helper.jsx
 
 ## Import Cycles
 - None detected.
 
-## Communities (374 total, 234 thin omitted)
+## Communities (383 total, 237 thin omitted)
 
 ### Community 0 - "routes/index.jsx"
-Cohesion: 0.03
-Nodes (61): Breadcrumb(), AnalyticsReports(), BlogDetails(), DeleteModal(), Calender(), ChartsKnob(), SparklineChart(), EcommerceCheckout() (+53 more)
+Cohesion: 0.04
+Nodes (50): Breadcrumb(), getRealTopSearches(), SearchAnalytics(), AnalyticsReports(), BlogDetails(), ChartsKnob(), SparklineChart(), productListvar (+42 more)
 
 ### Community 1 - "url_helper.jsx"
 Cohesion: 0.02
@@ -388,8 +402,8 @@ Cohesion: 0.07
 Nodes (56): deleteMail(), getMailsLists(), getselectedmails(), setfolderonmails(), staredMail(), trashMail(), deleteMailFail(), deleteMailSuccess() (+48 more)
 
 ### Community 3 - "auth.controller.ts"
-Cohesion: 0.07
-Nodes (59): cookieOptions, disable2FA(), forgotPassword(), getMe(), hashToken(), login(), logout(), refreshToken() (+51 more)
+Cohesion: 0.05
+Nodes (79): cookieOptions, disable2FA(), forgotPassword(), getMe(), hashToken(), login(), logout(), refreshToken() (+71 more)
 
 ### Community 4 - "e-commerce/saga.js"
 Cohesion: 0.05
@@ -404,24 +418,24 @@ Cohesion: 0.10
 Nodes (40): addMessage(), deleteMessage(), addMessageFail(), addMessageSuccess(), deleteMessageFail(), deleteMessageSuccess(), getChatsFail(), getChatsSuccess() (+32 more)
 
 ### Community 7 - "login/saga.js"
-Cohesion: 0.06
-Nodes (37): postFakeLogin(), postFakeRegister(), postJwtLogin(), postJwtRegister(), FirebaseAuthBackend, getFirebaseBackend(), realLogin(), realLogout() (+29 more)
+Cohesion: 0.14
+Nodes (23): postFakeLogin(), postJwtLogin(), getFirebaseBackend(), realLogin(), realLogout(), realSocialLogin(), apiError(), loginSuccess() (+15 more)
 
 ### Community 8 - "useCurrency"
-Cohesion: 0.08
-Nodes (33): JobListGlobalFilter(), TableContainer(), CURRENCIES, DEFAULT_CURRENCY, formatCurrency(), getActiveCurrencyCode(), getCurrencyDetails(), setActiveCurrencyCode() (+25 more)
+Cohesion: 0.17
+Nodes (16): DEFAULT_CURRENCY, formatCurrency(), getActiveCurrencyCode(), getCurrencyDetails(), useCurrency(), LatestTransaction(), TopCities(), EcommerceCart() (+8 more)
 
 ### Community 9 - "fakebackend_helper.jsx"
 Cohesion: 0.08
-Nodes (46): axiosApi, del(), get(), put(), deleteApplyJob(), deleteCategory(), deleteJobList(), deleteKanban() (+38 more)
+Nodes (44): axiosApi, del(), get(), put(), deleteApplyJob(), deleteCategory(), deleteJobList(), deleteKanban() (+36 more)
 
 ### Community 10 - "real_backend_helper.jsx"
-Cohesion: 0.13
-Nodes (29): PaginationControls(), createRealBlogPost(), createRealCoupon(), createRealDiscount(), createRealFlashSale(), createRealPage(), deleteRealBlogPost(), deleteRealCoupon() (+21 more)
+Cohesion: 0.15
+Nodes (26): PaginationControls(), createRealBlogPost(), createRealCoupon(), createRealDiscount(), createRealFlashSale(), createRealPage(), deleteRealBlogPost(), deleteRealCoupon() (+18 more)
 
 ### Community 11 - "calendar/actions.js"
-Cohesion: 0.12
-Nodes (39): addNewEvent(), deleteEvent(), updateEvent(), addEventFail(), addEventSuccess(), addNewEvent(), deleteEvent(), deleteEventFail() (+31 more)
+Cohesion: 0.11
+Nodes (41): addNewEvent(), deleteEvent(), getCategories(), getEvents(), updateEvent(), addEventFail(), addEventSuccess(), addNewEvent() (+33 more)
 
 ### Community 12 - "category/actions.js"
 Cohesion: 0.14
@@ -429,19 +443,19 @@ Nodes (31): CategoryList(), addCategoryFail(), addCategorySuccess(), addNewCateg
 
 ### Community 13 - "data/index.js"
 Cohesion: 0.10
-Nodes (28): activityData, cryptoReports, notificationsData, transactionsDataALL, transactionsDataBuy, transactionsDataSell, walletOptions, dahsboardEmail (+20 more)
+Nodes (27): blogs, cryptoOrderData, cryptoOrders, icoLandingTeam, orderbookData, productData, wallet, invoiceList (+19 more)
 
 ### Community 14 - "withRouter"
-Cohesion: 0.06
-Nodes (14): App(), withRouter(), Footer(), Navbar(), NonAuthLayout(), Footer(), SidebarContent(), EmailSideBar() (+6 more)
+Cohesion: 0.09
+Nodes (6): withRouter(), Footer(), Navbar(), SidebarContent(), CardContact(), EmailSideBar()
 
 ### Community 15 - "shared/src/index.ts"
-Cohesion: 0.06
-Nodes (34): ADMIN_ROLES, ApiResponse, AuthResponse, AuthUser, Disable2FAInput, disable2FASchema, ForgotPasswordInput, forgotPasswordSchema (+26 more)
+Cohesion: 0.05
+Nodes (39): ADMIN_ROLES, ApiResponse, AuthResponse, AuthUser, CUSTOMER_ACTIVITY_TYPES, CustomerActivityRecord, CustomerActivityType, Disable2FAInput (+31 more)
 
 ### Community 16 - "getChartColorsArray"
-Cohesion: 0.14
-Nodes (17): getChartColorsArray(), Apaexlinecolumn(), RadialChart(), barchart(), chartapex(), ColumnWithDataLabels(), DashedLine(), dountchart() (+9 more)
+Cohesion: 0.05
+Nodes (48): getChartColorsArray(), Apaexlinecolumn(), RadialChart(), barchart(), chartapex(), ColumnWithDataLabels(), DashedLine(), dountchart() (+40 more)
 
 ### Community 17 - "cms.routes.ts"
 Cohesion: 0.11
@@ -451,33 +465,33 @@ Nodes (29): createBlogCategory(), createBlogPost(), createMenuItem(), createNavi
 Cohesion: 0.17
 Nodes (11): PageData, StaticPageClient(), PopupConfig, api, ApiError, onRefreshed(), refreshAccessToken(), refreshSubscribers (+3 more)
 
-### Community 19 - "email-inbox.jsx"
+### Community 19 - "EcommerceOrders/index.jsx"
 Cohesion: 0.11
-Nodes (11): DeleteModal(), Spinners(), Chat(), ChatList(), UserChat(), CardContact(), EcommerceCustomers(), CardShop() (+3 more)
+Nodes (12): DeleteModal(), JobListGlobalFilter(), Spinners(), TableContainer(), Chat(), ChatList(), UserChat(), EcommerceCustomers() (+4 more)
 
 ### Community 20 - "layout/saga.js"
-Cohesion: 0.16
-Nodes (17): changeSidebarType(), changeTopbarTheme(), CHANGE_LAYOUT, CHANGE_LAYOUT_MODE, CHANGE_LAYOUT_WIDTH, CHANGE_PRELOADER, CHANGE_SIDEBAR_THEME, CHANGE_SIDEBAR_THEME_IMAGE (+9 more)
+Cohesion: 0.08
+Nodes (41): layoutModeTypes, layoutTypes, layoutWidthTypes, leftBarThemeImageTypes, leftSideBarThemeTypes, leftSidebarTypes, topBarThemeTypes, changeSidebarType() (+33 more)
 
 ### Community 21 - "ReCharts.jsx"
 Cohesion: 0.09
 Nodes (19): data, SimpleTreeMap(), data, MixBarChart(), data, SimpleAreaChart(), data, SimpleLineChart() (+11 more)
 
-### Community 22 - "AppError"
-Cohesion: 0.22
-Nodes (9): getReviewsByProduct(), moderateReview(), submitReview(), AppError, router, ModerateReviewInput, moderateReviewSchema, SubmitReviewInput (+1 more)
+### Community 22 - "review.routes.ts"
+Cohesion: 0.27
+Nodes (8): getReviewsByProduct(), moderateReview(), submitReview(), router, ModerateReviewInput, moderateReviewSchema, SubmitReviewInput, submitReviewSchema
 
 ### Community 23 - "Admin Authentication & Profiles"
 Cohesion: 0.11
 Nodes (19): calenderDefaultCategories, events, chats, contacts, groups, messages, userProfile, users (+11 more)
 
-### Community 24 - "Storefront Client Application (24)"
-Cohesion: 0.12
-Nodes (17): activityBlogData, blogPost, blogStatsData, commentsData, postPopularData, postRecentData, progressData, visitor (+9 more)
+### Community 24 - "Dashboard-Blog/index.jsx"
+Cohesion: 0.11
+Nodes (19): activityBlogData, blogPost, blogStatsData, commentsData, postPopularData, postRecentData, progressData, visitor (+11 more)
 
 ### Community 25 - "useBranding"
 Cohesion: 0.11
-Nodes (26): BrandLogo(), Header(), BrandingContext, useBranding(), realResetPassword(), ForgetPasswordPage(), Login(), Register() (+18 more)
+Nodes (27): BrandLogo(), Header(), Footer(), BrandingContext, useBranding(), realResetPassword(), ForgetPasswordPage(), Login() (+19 more)
 
 ### Community 26 - "post"
 Cohesion: 0.12
@@ -488,64 +502,60 @@ Cohesion: 0.11
 Nodes (13): BaseCustomClass(), BlockCheckboxButton(), ButtonSizesWidth(), DefaultOutlineButtons(), UiButtons(), RingVariables(), RoundedWithIcon(), SassUtilitiesAPI() (+5 more)
 
 ### Community 29 - "Header.tsx"
-Cohesion: 0.11
-Nodes (23): CartPage(), ALL_MOCK_PRODUCTS, ProductDetailClient(), ALL_MOCK_PRODUCTS, CATEGORIES_LIST, ShopContent(), applyMockFilters(), fetchProducts() (+15 more)
+Cohesion: 0.10
+Nodes (27): CartPage(), ALL_MOCK_PRODUCTS, ProductDetailClient(), ALL_MOCK_PRODUCTS, CATEGORIES_LIST, ShopContent(), applyMockFilters(), fetchProducts() (+19 more)
 
 ### Community 30 - "useNavigation.ts"
 Cohesion: 0.17
 Nodes (13): Footer(), DEFAULT_FOOTER_ITEMS, DEFAULT_HEADER_ITEMS, menuCache, MenuItemData, NavigationMenuData, useNavigation(), applyThemeToDOM() (+5 more)
 
 ### Community 31 - "contacts/actions.js"
-Cohesion: 0.17
-Nodes (16): ADD_NEW_USER, ADD_USER_FAIL, ADD_USER_SUCCESS, DELETE_USER, DELETE_USER_FAIL, DELETE_USER_SUCCESS, GET_USER_PROFILE, GET_USER_PROFILE_FAIL (+8 more)
+Cohesion: 0.10
+Nodes (35): addNewUser(), deleteUser(), getUserProfile(), updateUser(), addUserFail(), addUserSuccess(), deleteUserFail(), deleteUserSuccess() (+27 more)
 
-### Community 32 - "useSettings.ts"
-Cohesion: 0.08
-Nodes (32): AddressesPage(), ForgotPasswordPage(), LoginPage(), MOCK_ORDERS, OrdersPage(), STATUS_STEPS, ProfilePage(), RegisterPage() (+24 more)
+### Community 32 - "useSettings"
+Cohesion: 0.15
+Nodes (15): AddressesPage(), ForgotPasswordPage(), LoginPage(), MOCK_ORDERS, OrdersPage(), STATUS_STEPS, ProfilePage(), RegisterPage() (+7 more)
 
 ### Community 33 - "dependencies"
-Cohesion: 0.10
-Nodes (21): dependencies, bcryptjs, cookie-parser, cors, dotenv, express, @prisma/client, redis (+13 more)
+Cohesion: 0.09
+Nodes (23): dependencies, bcryptjs, dotenv, express, nodemailer, @paypal/checkout-server-sdk, @prisma/client, redis (+15 more)
 
 ### Community 34 - "promotion.routes.ts"
 Cohesion: 0.14
 Nodes (20): createCoupon(), createDiscount(), createFlashSale(), deleteCoupon(), deleteDiscount(), deleteFlashSale(), getActiveFlashSales(), getCoupons() (+12 more)
 
 ### Community 35 - "cart.routes.ts"
-Cohesion: 0.16
-Nodes (13): addToCart(), getCart(), getOrCreateCart(), mergeCart(), removeFromCart(), updateCartItem(), MetaCapiService, AddToCartInput (+5 more)
+Cohesion: 0.15
+Nodes (14): addToCart(), getCart(), getOrCreateCart(), mergeCart(), removeFromCart(), updateCartItem(), router, MetaCapiService (+6 more)
 
 ### Community 36 - "tasks"
 Cohesion: 0.09
 Nodes (21): ^build, ^check-types, .env*, ^lint, !.next/cache/**, $TURBO_DEFAULT$, dependsOn, inputs (+13 more)
 
-### Community 37 - "contacts/saga.js"
+### Community 37 - "invoices-detail.jsx"
 Cohesion: 0.18
-Nodes (21): addNewUser(), deleteUser(), getUserProfile(), getUsers(), updateUser(), addUserFail(), addUserSuccess(), deleteUserFail() (+13 more)
+Nodes (5): IconMaterialdesign(), InvoiceDetail(), CardPricing(), PagesPricing(), getInvoiceDetail()
 
 ### Community 38 - "invoices/actions.js"
-Cohesion: 0.23
-Nodes (15): getInvoices(), getInvoiceDetailFail(), getInvoiceDetailSuccess(), getInvoicesFail(), getInvoicesSuccess(), GET_INVOICE_DETAIL, GET_INVOICE_DETAIL_FAIL, GET_INVOICE_DETAIL_SUCCESS (+7 more)
+Cohesion: 0.22
+Nodes (15): getInvoiceDetail(), getInvoices(), getInvoiceDetailFail(), getInvoiceDetailSuccess(), getInvoicesFail(), getInvoicesSuccess(), GET_INVOICE_DETAIL, GET_INVOICE_DETAIL_FAIL (+7 more)
 
-### Community 39 - "Admin Analytics & Dashboards"
-Cohesion: 0.14
-Nodes (11): CardUser(), CardWelcome(), ChantBox(), Earning(), DashboardSaas(), MiniWidget(), Reciver(), SalesAnalytics() (+3 more)
+### Community 39 - "register/saga.js"
+Cohesion: 0.20
+Nodes (14): postFakeRegister(), postJwtRegister(), realRegister(), registerUserFailed(), registerUserSuccessful(), REGISTER_USER, REGISTER_USER_FAILED, REGISTER_USER_SUCCESSFUL (+6 more)
 
 ### Community 40 - "Admin UI & Modules (40)"
 Cohesion: 0.14
 Nodes (11): BasicCard(), CardColor(), CardColorOutline(), CardFeatured(), CardGroups(), CardsMasonry(), CardTitles(), CardTitleImg() (+3 more)
 
-### Community 41 - "changeBodyAttribute"
-Cohesion: 0.18
-Nodes (11): changeBodyAttribute(), changeLayout(), changeLayoutWidth(), changeLeftSidebarTheme(), changeLeftSidebarThemeImage(), changeTopbarTheme(), watchChangeLayoutType(), watchChangeLayoutWidth() (+3 more)
-
 ### Community 42 - "dashboard-saas/saga.js"
-Cohesion: 0.23
-Nodes (13): DashboardSaasapiFail(), DashboardSaasapiSuccess(), API_FAIL, API_SUCCESS, GET_EARNING_DATA, GET_TOP_SELLING_PRODUCT, DashboardSaas(), INIT_STATE (+5 more)
+Cohesion: 0.25
+Nodes (12): DashboardSaasapiFail(), DashboardSaasapiSuccess(), API_FAIL, API_SUCCESS, GET_EARNING_DATA, GET_TOP_SELLING_PRODUCT, INIT_STATE, dashboardSaasSaga() (+4 more)
 
-### Community 43 - "api/src/index.ts"
-Cohesion: 0.10
-Nodes (16): capturePayPalOrder(), createIntentHandler(), paypalWebhookHandler(), webhookHandler(), app, globalErrorHandler(), router, router (+8 more)
+### Community 43 - "payment.controller.ts"
+Cohesion: 0.15
+Nodes (9): capturePayPalOrder(), createIntentHandler(), paypalWebhookHandler(), webhookHandler(), router, capturePayPalOrderService(), paypalClient, createPaymentIntent() (+1 more)
 
 ### Community 44 - "checkout/page.tsx"
 Cohesion: 0.12
@@ -559,57 +569,57 @@ Nodes (19): dependencies, axios, draft-js, formik, react-dom, react-responsive-c
 Cohesion: 0.20
 Nodes (14): postFakeForgetPwd(), postJwtForgetPwd(), realForgotPassword(), userForgetPasswordError(), userForgetPasswordSuccess(), FORGET_PASSWORD, FORGET_PASSWORD_ERROR, FORGET_PASSWORD_SUCCESS (+6 more)
 
-### Community 47 - "ChartsDynamicColor.jsx"
-Cohesion: 0.20
-Nodes (8): BarChart(), DountChart(), LineChart(), PieChart(), PolarChart(), RadarChart(), ChartjsChart(), ApexRadial()
+### Community 47 - "Dashboard/index.jsx"
+Cohesion: 0.27
+Nodes (6): getDashboardStats(), ActivityComp(), Dashboard(), MonthlyEarning(), SocialSource(), WelcomeComp()
 
 ### Community 49 - "profile/saga.js"
 Cohesion: 0.19
 Nodes (15): postFakeProfile(), postJwtProfile(), realUpdateProfile(), profileError(), profileSuccess(), EDIT_PROFILE, PROFILE_ERROR, PROFILE_SUCCESS (+7 more)
 
 ### Community 50 - "devDependencies"
-Cohesion: 0.09
-Nodes (23): devDependencies, nodemon, prisma, ts-node, @types/bcryptjs, @types/cookie-parser, @types/cors, @types/express (+15 more)
+Cohesion: 0.08
+Nodes (25): devDependencies, nodemon, prisma, ts-node, @types/bcryptjs, @types/cookie-parser, @types/cors, @types/express (+17 more)
 
 ### Community 51 - "auth.ts"
-Cohesion: 0.15
-Nodes (16): getDashboardStats(), expandStoreAliases(), expandThemeAliases(), getSettings(), serializeValue(), updateSettings(), getPresignedUrl(), handleSimulatedUpload() (+8 more)
+Cohesion: 0.19
+Nodes (14): getDashboardStats(), expandStoreAliases(), expandThemeAliases(), getSettings(), serializeValue(), updateSettings(), verifyAccessToken(), authenticate() (+6 more)
 
 ### Community 52 - "dependencies"
 Cohesion: 0.04
 Nodes (44): dependencies, lucide-react, next, @paypal/react-paypal-js, react, react-dom, @repo/shared, @stripe/react-stripe-js (+36 more)
 
 ### Community 53 - "layout.tsx"
-Cohesion: 0.21
-Nodes (9): geistMono, geistSans, metadata, RootLayout(), viewport, MarketingPopup(), TrackingScripts(), generateOrganizationSchema() (+1 more)
+Cohesion: 0.17
+Nodes (11): geistMono, geistSans, metadata, RootLayout(), viewport, AnnouncementBar(), MarketingPopup(), ThemeStyleInjector() (+3 more)
 
-### Community 54 - "EChart.jsx"
-Cohesion: 0.16
-Nodes (9): Bubble(), Candlestickchart(), Doughnut(), Guage(), LineBar(), Line(), Pie(), Scatter() (+1 more)
+### Community 54 - "reducers.js"
+Cohesion: 0.18
+Nodes (10): Calendar(), category(), Calendar(), contacts(), Dashboard(), DashboardSaas(), Ecommerce(), Invoices() (+2 more)
 
 ### Community 55 - "FormAdvanced/index.jsx"
 Cohesion: 0.16
 Nodes (8): BootstrapDatePicker(), BootstrapMaxLength(), BootstrapTouchSpin(), CssSwitch(), DatePicker(), Select2(), FormAdvanced(), ReactColorPicker()
 
 ### Community 56 - "order.routes.ts"
-Cohesion: 0.17
-Nodes (16): createOrder(), getOrderById(), getOrders(), processRefund(), updateOrderStatus(), router, sendOrderConfirmationEmail(), sendOrderStatusUpdateEmail() (+8 more)
+Cohesion: 0.14
+Nodes (14): getOrderById(), getOrders(), RateLimitEntry, rateLimiter(), rateLimitStore, validateBody(), router, addressSubSchema (+6 more)
 
 ### Community 57 - "devDependencies"
 Cohesion: 0.06
 Nodes (31): eslint-config-prettier, eslint-plugin-only-warn, eslint-plugin-turbo, @next/eslint-plugin-next, devDependencies, eslint, eslint-config-prettier, @eslint/js (+23 more)
 
-### Community 58 - "prisma.ts"
-Cohesion: 0.22
-Nodes (13): startAbandonedCartJob(), initCronJobs(), startReviewRequestJob(), globalForPrisma, prisma, __dirname, __filename, getTemplate() (+5 more)
+### Community 58 - "customer.routes.ts"
+Cohesion: 0.29
+Nodes (8): createAddress(), deleteAddress(), getAddresses(), getCustomers(), updateAddress(), router, AddressInput, addressSchema
 
 ### Community 59 - "devDependencies"
 Cohesion: 0.06
 Nodes (30): devDependencies, eslint, @eslint/js, eslint-plugin-react, eslint-plugin-react-hooks, eslint-plugin-react-refresh, globals, @types/react (+22 more)
 
-### Community 60 - "security.ts"
-Cohesion: 0.17
-Nodes (11): createCategory(), deleteCategory(), getCategories(), updateCategory(), RateLimitEntry, rateLimiter(), rateLimitStore, validateBody() (+3 more)
+### Community 60 - "SystemSettings.jsx"
+Cohesion: 0.40
+Nodes (7): CURRENCIES, setActiveCurrencyCode(), getRealSettings(), updateRealSettings(), SystemSettings(), StorefrontHomepage(), StorefrontTheme()
 
 ### Community 61 - "product.routes.ts"
 Cohesion: 0.19
@@ -623,13 +633,13 @@ Nodes (19): compilerOptions, declaration, declarationMap, esModuleInterop, incre
 Cohesion: 0.18
 Nodes (10): compilerOptions, allowJs, jsx, module, moduleResolution, noEmit, plugins, extends (+2 more)
 
-### Community 64 - "sagas.js"
-Cohesion: 0.22
-Nodes (12): apiFail(), apiSuccess(), API_FAIL, API_SUCCESS, GET_DASHBOARD_EMAILCHART, Dashboard(), INIT_STATE, dashboardSaga() (+4 more)
+### Community 64 - "dashboard/saga.js"
+Cohesion: 0.30
+Nodes (9): apiFail(), apiSuccess(), API_FAIL, API_SUCCESS, GET_DASHBOARD_EMAILCHART, INIT_STATE, dashboardSaga(), getChartsData() (+1 more)
 
-### Community 65 - "reducers.js"
-Cohesion: 0.13
-Nodes (14): BrandingProvider(), login(), Calendar(), category(), Calendar(), contacts(), DashboardBlog(), Ecommerce() (+6 more)
+### Community 65 - "sagas.js"
+Cohesion: 0.19
+Nodes (12): BrandingProvider(), checkValidServiceWorker(), isLocalhost, register(), registerValidSW(), unregister(), contactsSaga(), sagaMiddleware (+4 more)
 
 ### Community 66 - "webhook.routes.ts"
 Cohesion: 0.24
@@ -644,8 +654,8 @@ Cohesion: 0.09
 Nodes (21): devDependencies, prettier, turbo, typescript, engines, node, turbo, typescript (+13 more)
 
 ### Community 69 - "dashboard-blog/saga.js"
-Cohesion: 0.33
-Nodes (9): dashboardBlogApiError(), dashboardBlogApiSuccess(), API_FAIL, API_SUCCESS, GET_VISITOR_DATA, INIT_STATE, dashboardVisitorSaga(), getvisitorData() (+1 more)
+Cohesion: 0.30
+Nodes (10): dashboardBlogApiError(), dashboardBlogApiSuccess(), API_FAIL, API_SUCCESS, GET_VISITOR_DATA, DashboardBlog(), INIT_STATE, dashboardVisitorSaga() (+2 more)
 
 ### Community 70 - "UiModal/index.jsx"
 Cohesion: 0.21
@@ -675,17 +685,17 @@ Nodes (6): CloseMenuAlignment(), DarkMenuContent(), UiDropdown(), LeftDropUp(), 
 Cohesion: 0.12
 Nodes (16): dependencies, zod, devDependencies, @repo/typescript-config, typescript, typescript, zod, main (+8 more)
 
-### Community 78 - "RightSidebar.jsx"
-Cohesion: 0.31
-Nodes (7): layoutModeTypes, layoutTypes, layoutWidthTypes, leftBarThemeImageTypes, leftSideBarThemeTypes, leftSidebarTypes, topBarThemeTypes
+### Community 78 - "activity.routes.ts"
+Cohesion: 0.22
+Nodes (13): cleanupActivities(), flushBuffer(), getActivities(), getActivityStats(), getConversionFunnel(), getCustomerJourney(), getLiveActivities(), getTopSearches() (+5 more)
 
-### Community 79 - "customer.routes.ts"
-Cohesion: 0.29
-Nodes (8): createAddress(), deleteAddress(), getAddresses(), getCustomers(), updateAddress(), router, AddressInput, addressSchema
+### Community 79 - "api/src/index.ts"
+Cohesion: 0.13
+Nodes (17): createCategory(), deleteCategory(), getCategories(), updateCategory(), getPresignedUrl(), handleSimulatedUpload(), app, AppError (+9 more)
 
-### Community 80 - "changeLeftSidebarType"
-Cohesion: 0.40
-Nodes (5): changeLeftSidebarType(), manageBodyClass(), showRightSidebar(), watchChangeLeftSidebarType(), watchShowRightSidebar()
+### Community 80 - "prisma.ts"
+Cohesion: 0.12
+Nodes (9): startAbandonedCartJob(), startActivityJobs(), initCronJobs(), startReviewRequestJob(), globalForPrisma, prisma, getRedisClient(), ActivityService (+1 more)
 
 ### Community 81 - "onAddNewCustomer"
 Cohesion: 0.50
@@ -703,9 +713,9 @@ Nodes (13): compilerOptions, outDir, rootDir, exclude, extends, include, dist, n
 Cohesion: 0.28
 Nodes (5): BlogGrid(), Index(), BlogList(), Index(), RightBar()
 
-### Community 96 - "crypto.js"
-Cohesion: 0.25
-Nodes (7): blogs, cryptoOrderData, cryptoOrders, icoLandingTeam, orderbookData, productData, wallet
+### Community 96 - "useSettings.ts"
+Cohesion: 0.12
+Nodes (15): AnnouncementSettings, DEFAULT_HOMEPAGE_SECTIONS, DEFAULT_PROMO_BANNERS, DEFAULT_SLIDERS, DEFAULT_TESTIMONIALS, DEFAULT_VALUE_PROPS, HeroSlider, HomepageSectionConfig (+7 more)
 
 ### Community 97 - "file-manager.js"
 Cohesion: 0.29
@@ -720,24 +730,24 @@ Cohesion: 0.47
 Nodes (3): FileList(), Index(), RecentFile()
 
 ### Community 100 - "scripts"
-Cohesion: 0.25
-Nodes (8): scripts, build, dev, lint, prisma:generate, prisma:migrate, prisma:studio, start
+Cohesion: 0.20
+Nodes (10): scripts, build, dev, lint, prisma:deploy, prisma:generate, prisma:migrate, prisma:studio (+2 more)
 
 ### Community 101 - "shared/tsconfig.json"
 Cohesion: 0.18
 Nodes (10): compilerOptions, outDir, rootDir, exclude, extends, include, dist, node_modules (+2 more)
 
-### Community 102 - "projects.js"
-Cohesion: 0.29
-Nodes (6): options, OverviewTeamMember, projectAssignedTo, projectListData, projects, series
+### Community 102 - "🚀 100% Free Tier ($0/Month) Deployment & CI/CD Guide"
+Cohesion: 0.20
+Nodes (9): 🚀 100% Free Tier ($0/Month) Deployment & CI/CD Guide, 🏗️ Architecture Overview, 🔄 Automated CI/CD Behavior, Step 1: Set Up Free PostgreSQL Database (Neon.tech), Step 2: Set Up Free Redis Cache (Upstash), Step 3: Deploy the API Server (Render.com), Step 4: Deploy Storefront (Vercel), Step 5: Deploy Admin Dashboard (Cloudflare Pages) (+1 more)
 
 ### Community 103 - "tasks.js"
 Cohesion: 0.29
 Nodes (6): AddTeamMember, options, recentTasksData, series, statusClasses, tasks
 
-### Community 104 - "Reviews.jsx"
-Cohesion: 0.38
-Nodes (3): Reviews(), onLikeComment(), onLikeReply()
+### Community 104 - "App.jsx"
+Cohesion: 0.22
+Nodes (6): App(), NonAuthLayout(), authProtectedRoutes, publicRoutes, Authmiddleware(), changeLayoutMode()
 
 ### Community 105 - "api/package.json"
 Cohesion: 0.29
@@ -763,9 +773,9 @@ Nodes (4): archiveData, categoriesData, popularPosts, tagsData
 Cohesion: 0.33
 Nodes (4): chatData, dashboardEarning, tasksData, TopSellingData
 
-### Community 114 - "serviceWorker.jsx"
-Cohesion: 0.60
-Nodes (5): checkValidServiceWorker(), isLocalhost, register(), registerValidSW(), unregister()
+### Community 114 - "dashboard-crypto.js"
+Cohesion: 0.29
+Nodes (6): cryptoReports, notificationsData, transactionsDataALL, transactionsDataBuy, transactionsDataSell, walletOptions
 
 ### Community 115 - "base.js"
 Cohesion: 0.47
@@ -775,29 +785,57 @@ Nodes (3): config, nextJsConfig, config
 Cohesion: 0.50
 Nodes (3): jobApply, jobListCandidate, jobs
 
+### Community 124 - "CustomerActivityFeed.jsx"
+Cohesion: 0.27
+Nodes (9): getRealActivities(), getRealActivityStats(), getRealConversionFunnel(), getRealCustomerJourney(), ConversionFunnel(), STAGE_COLORS, STAGE_ICONS, ACTIVITY_TYPE_BADGES (+1 more)
+
 ### Community 138 - "onAddReply"
 Cohesion: 0.67
 Nodes (3): onAddReplyFail(), onAddReplySuccess(), onAddReply()
 
+### Community 139 - "Reviews.jsx"
+Cohesion: 0.38
+Nodes (3): Reviews(), onLikeComment(), onLikeReply()
+
+### Community 147 - "dashboard-job.js"
+Cohesion: 0.33
+Nodes (5): activityFeedData, chartsData, jobVacancyData, recentAddedJobsData, statisticsApplications
+
+### Community 152 - "FormUpload.jsx"
+Cohesion: 0.67
+Nodes (3): FormUpload(), formatBytes(), handleAcceptedFiles()
+
+### Community 187 - "PopupManager.jsx"
+Cohesion: 0.83
+Nodes (3): getRealPopupConfig(), updateRealPopupConfig(), PopupManager()
+
+### Community 192 - "dashboard.js"
+Cohesion: 0.40
+Nodes (4): activityData, dahsboardEmail, latestTransaction, TopCitiesSelling
+
+### Community 199 - "EcommerceCheckout.jsx"
+Cohesion: 0.40
+Nodes (3): EcommerceCheckout(), optionGroup, orderSummary
+
 ## Knowledge Gaps
-- **754 isolated node(s):** `name`, `private`, `version`, `type`, `dev` (+749 more)
+- **781 isolated node(s):** `name`, `private`, `version`, `type`, `dev` (+776 more)
   These have ≤1 connection - possible missing edges or undocumented components.
-- **234 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+- **237 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `Breadcrumb()` connect `routes/index.jsx` to `useCurrency`, `real_backend_helper.jsx`, `category/actions.js`, `withRouter`, `getChartColorsArray`, `email-inbox.jsx`, `ReCharts.jsx`, `Storefront Client Application (24)`, `post`, `UiButtons/index.jsx`, `Admin Analytics & Dashboards`, `Admin UI & Modules (40)`, `ChartsDynamicColor.jsx`, `EChart.jsx`, `FormAdvanced/index.jsx`, `UiModal/index.jsx`, `UiDropdown/index.jsx`, `BlogGrid/index.jsx`, `EcommerceAddProduct.jsx`, `FileManager/index.jsx`, `UiCarousel.jsx`?**
-  _High betweenness centrality (0.027) - this node is a cross-community bridge._
-- **Why does `withRouter()` connect `withRouter` to `useCurrency`, `useBranding`, `ContactsProfile/index.jsx`, `email-inbox.jsx`?**
-  _High betweenness centrality (0.009) - this node is a cross-community bridge._
+- **Why does `Breadcrumb()` connect `routes/index.jsx` to `useCurrency`, `real_backend_helper.jsx`, `category/actions.js`, `data/index.js`, `withRouter`, `getChartColorsArray`, `EcommerceOrders/index.jsx`, `ReCharts.jsx`, `FormUpload.jsx`, `Dashboard-Blog/index.jsx`, `post`, `UiButtons/index.jsx`, `invoices-detail.jsx`, `Admin UI & Modules (40)`, `Dashboard/index.jsx`, `FormAdvanced/index.jsx`, `PopupManager.jsx`, `SystemSettings.jsx`, `UiModal/index.jsx`, `EcommerceCheckout.jsx`, `UiDropdown/index.jsx`, `UINotifications.jsx`, `BlogGrid/index.jsx`, `EcommerceAddProduct.jsx`, `FileManager/index.jsx`, `UiCarousel.jsx`, `CustomerActivityFeed.jsx`?**
+  _High betweenness centrality (0.025) - this node is a cross-community bridge._
+- **Why does `withRouter()` connect `withRouter` to `routes/index.jsx`, `invoices-detail.jsx`, `App.jsx`, `useCurrency`, `ContactsProfile/index.jsx`, `data/index.js`, `EcommerceOrders/index.jsx`, `useBranding`?**
+  _High betweenness centrality (0.010) - this node is a cross-community bridge._
+- **Why does `FirebaseAuthBackend` connect `FirebaseAuthBackend` to `login/saga.js`?**
+  _High betweenness centrality (0.008) - this node is a cross-community bridge._
 - **What connects `name`, `private`, `version` to the rest of the system?**
-  _754 weakly-connected nodes found - possible documentation gaps or missing edges._
+  _781 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `routes/index.jsx` be split into smaller, more focused modules?**
-  _Cohesion score 0.03309547244094488 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.042048517520215635 - nodes in this community are weakly interconnected._
 - **Should `url_helper.jsx` be split into smaller, more focused modules?**
   _Cohesion score 0.0196078431372549 - nodes in this community are weakly interconnected._
 - **Should `Admin Redux & Sagas State` be split into smaller, more focused modules?**
   _Cohesion score 0.07374890254609306 - nodes in this community are weakly interconnected._
-- **Should `auth.controller.ts` be split into smaller, more focused modules?**
-  _Cohesion score 0.0673076923076923 - nodes in this community are weakly interconnected._

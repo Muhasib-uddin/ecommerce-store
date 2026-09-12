@@ -5,12 +5,14 @@
   "type": "module",
   "scripts": {
     "dev": "npx tsx watch src/index.ts",
-    "build": "tsc",
+    "build": "prisma generate && tsc",
     "start": "node dist/index.js",
     "lint": "eslint src --ext .ts",
     "prisma:generate": "prisma generate",
     "prisma:migrate": "prisma migrate dev",
-    "prisma:studio": "prisma studio"
+    "prisma:deploy": "prisma migrate deploy",
+    "prisma:studio": "prisma studio",
+    "test:email": "npx tsx scripts/test-email.ts"
   },
   "dependencies": {
     "@paypal/checkout-server-sdk": "^1.0.3",
@@ -25,6 +27,7 @@
     "helmet": "^7.1.0",
     "jsonwebtoken": "^9.0.2",
     "node-cron": "^4.2.1",
+    "nodemailer": "^10.0.3",
     "redis": "^4.6.13",
     "resend": "^6.12.4",
     "stripe": "^22.1.1",
@@ -37,6 +40,7 @@
     "@types/express": "^4.17.21",
     "@types/jsonwebtoken": "^9.0.6",
     "@types/node": "^20.11.24",
+    "@types/nodemailer": "^8.0.1",
     "@types/paypal__checkout-server-sdk": "^1.0.8",
     "nodemon": "^3.1.0",
     "prisma": "^5.10.0",

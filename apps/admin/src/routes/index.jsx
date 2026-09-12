@@ -156,6 +156,9 @@ import NavigationManager from "../pages/Content/NavigationManager";
 import PopupManager from "../pages/Content/PopupManager";
 import AnalyticsReports from "../pages/Analytics/AnalyticsReports";
 import SystemSettings from "../pages/Settings/SystemSettings";
+import CustomerActivityFeed from "../pages/Activity/CustomerActivityFeed";
+import ConversionFunnel from "../pages/Activity/ConversionFunnel";
+import SearchAnalytics from "../pages/Activity/SearchAnalytics";
 
 const authProtectedRoutes = [
   // Storefront
@@ -175,6 +178,11 @@ const authProtectedRoutes = [
 
   // Reports
   { path: "/reports/analytics", component: <AnalyticsReports /> },
+
+  // Customer Activity Tracking & Analytics
+  { path: "/activity/feed", component: <CustomerActivityFeed /> },
+  { path: "/activity/funnel", component: <ConversionFunnel /> },
+  { path: "/activity/searches", component: <SearchAnalytics /> },
 
   // Settings
   { path: "/settings/system", component: <SystemSettings /> },

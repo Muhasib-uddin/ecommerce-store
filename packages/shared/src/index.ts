@@ -158,3 +158,70 @@ export const PAYMENT_METHODS = [
 export type OrderStatus = (typeof ORDER_STATUSES)[number];
 export type PaymentStatus = (typeof PAYMENT_STATUSES)[number];
 export type PaymentMethod = (typeof PAYMENT_METHODS)[number];
+
+// ==========================================
+// 6. CUSTOMER ACTIVITY TRACKING
+// ==========================================
+
+export const CUSTOMER_ACTIVITY_TYPES = [
+  "PAGE_VIEW",
+  "PRODUCT_VIEW",
+  "SEARCH",
+  "ADD_TO_CART",
+  "REMOVE_FROM_CART",
+  "UPDATE_CART",
+  "INITIATE_CHECKOUT",
+  "PURCHASE",
+  "REGISTRATION",
+  "LOGIN",
+  "LOGOUT",
+  "REVIEW_SUBMITTED",
+  "WISHLIST_ADD",
+  "WISHLIST_REMOVE",
+  "COUPON_APPLIED",
+  "COUPON_REMOVED",
+] as const;
+
+export type CustomerActivityType = (typeof CUSTOMER_ACTIVITY_TYPES)[number];
+
+export const trackActivitySchema = z.object({
+  type: z.enum(CUSTOMER_ACTIVITY_TYPES),
+  sessionId: z.string().optional(),
+  productId: z.string().optional(),
+  categoryId: z.string().optional(),
+  orderId: z.string().optional(),
+  searchQuery: z.string().optional(),
+  metadata: z.record(z.any()).optional(),
+  duration: z.number().int().nonnegative().optional(),
+});
+
+export type TrackActivityInput = z.infer<typeof trackActivitySchema>;
+
+export interface CustomerActivityRecord {
+  id: string;
+  type: CustomerActivityType;
+  userId: string | null;
+  sessionId: string | null;
+  productId: string | null;
+  categoryId: string | null;
+  orderId: string | null;
+  searchQuery: string | null;
+  metadata: Record<string, any> | null;
+  ipAddress: string | null;
+  userAgent: string | null;
+  duration: number | null;
+  createdAt: string | Date;
+  user?: {
+    id: string;
+    email: string;
+    firstName: string | null;
+    lastName: string | null;
+  } | null;
+  product?: {
+    id: string;
+    name: string;
+    slug: string;
+    price: number | string;
+  } | null;
+}
+

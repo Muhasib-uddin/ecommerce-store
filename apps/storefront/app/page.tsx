@@ -166,7 +166,7 @@ export default function Home() {
     <section
       key="hero"
       id="hero-section"
-      className="relative overflow-hidden bg-zinc-950 text-white min-h-[580px] sm:min-h-[640px] flex items-center transition-all duration-700"
+      className="relative overflow-hidden bg-zinc-950 text-white min-h-[calc(100dvh-4rem)] flex items-center transition-all duration-700"
     >
       {/* Background Hero Image */}
       <div
@@ -248,7 +248,7 @@ export default function Home() {
     if (activeValueProps.length === 0) return null;
     return (
       <section key="valueProps" id="value-props-section" className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-10 w-full">
-        <div className={`grid grid-cols-1 md:grid-cols-${Math.min(activeValueProps.length, 4)} gap-6 p-6 rounded-2xl bg-zinc-50 border border-zinc-200/60 dark:bg-zinc-900/30 dark:border-zinc-800`}>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 p-6 rounded-2xl bg-zinc-50 border border-zinc-200/60 dark:bg-zinc-900/30 dark:border-zinc-800">
           {activeValueProps.map((vp, index) => (
             <div
               key={vp.id || index}
@@ -441,7 +441,7 @@ export default function Home() {
           <h2 className="text-2xl sm:text-3xl font-bold text-zinc-900 dark:text-zinc-100">Reviews & Tastemakers</h2>
           <p className="text-sm text-zinc-500 mt-2 dark:text-zinc-400">What clients are writing about our premium catalog experience.</p>
         </div>
-        <div className={`grid grid-cols-1 md:grid-cols-${Math.min(activeTestimonials.length, 3)} gap-6`}>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {activeTestimonials.map((item, idx) => (
             <div key={item.id || idx} className="p-6 rounded-2xl border border-zinc-200 bg-white dark:border-zinc-800 dark:bg-zinc-900/20 flex flex-col justify-between">
               <div>
@@ -450,7 +450,7 @@ export default function Home() {
                     <Star key={i} className="h-4 w-4 fill-current" />
                   ))}
                 </div>
-                <p className="text-zinc-600 dark:text-zinc-350 text-sm leading-relaxed italic mb-6">
+                <p className="text-zinc-600 dark:text-zinc-300 text-sm leading-relaxed italic mb-6">
                   "{item.quote}"
                 </p>
               </div>
@@ -509,3 +509,4 @@ export default function Home() {
     </div>
   );
 }
+

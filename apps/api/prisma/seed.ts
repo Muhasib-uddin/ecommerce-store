@@ -7,6 +7,7 @@ async function main() {
   console.log("Start seeding...");
 
   // 1. Clear database tables
+  await prisma.customerActivity.deleteMany({});
   await prisma.auditLog.deleteMany({});
   await prisma.apiKey.deleteMany({});
   await prisma.webhookEvent.deleteMany({});
@@ -107,11 +108,11 @@ async function main() {
 
   // 3. Create Categories
   const categoriesData = [
-    { name: "Electronics", slug: "electronics", description: "Gadgets and gear" },
-    { name: "Fashion & Clothing", slug: "fashion-clothing", description: "Stylish apparel" },
-    { name: "Home & Kitchen", slug: "home-kitchen", description: "Furnishings and appliances" },
-    { name: "Books", slug: "books", description: "Bestsellers and educational books" },
-    { name: "Sports & Outdoors", slug: "sports-outdoors", description: "Atheletic gear and accessories" },
+    { name: "Men's Shoes", slug: "mens-shoes", description: "Premium men's footwear" },
+    { name: "Women's Shoes", slug: "womens-shoes", description: "Elegant women's footwear" },
+    { name: "Kids' Shoes", slug: "kids-shoes", description: "Comfortable kids' footwear" },
+    { name: "Medicated Shoes", slug: "medicated-shoes", description: "Orthopedic and comfort footwear" },
+    { name: "Shoe Care", slug: "shoe-care", description: "Shoe care, socks, and accessories" },
   ];
 
   const categories = [];
@@ -123,11 +124,11 @@ async function main() {
   }
 
   // Create child categories
-  const mobilePhones = await prisma.category.create({
+  const sneakers = await prisma.category.create({
     data: {
-      name: "Mobile Phones",
-      slug: "mobile-phones",
-      description: "Smartphones and accessories",
+      name: "Sneakers",
+      slug: "sneakers",
+      description: "Casual and athletic sneakers",
       parentId: categories[0]!.id,
     },
   });
@@ -145,22 +146,24 @@ async function main() {
 
   // 5. Create 50 Products
   const products = [];
-  const brandNames = ["Alpha", "Beta", "Gamma", "Delta", "Sigma"];
+  const brandNames = ["GAIT", "Puma", "Nike", "Adidas", "Reebok"];
+  const shoeTypes = ["Sneakers", "Loafers", "Formal Oxfords", "Walking Shoes", "Sandals"];
 
   for (let i = 1; i <= 50; i++) {
     const cat = categories[i % categories.length]!;
     const brand = brandNames[i % brandNames.length]!;
-    const basePrice = 10 + (i * 7.5);
+    const shoeType = shoeTypes[i % shoeTypes.length]!;
+    const basePrice = 40 + (i * 5.5);
     const costPrice = basePrice * 0.6;
     const comparePrice = i % 3 === 0 ? basePrice * 1.25 : null;
 
     const product = await prisma.product.create({
       data: {
         categoryId: cat.id,
-        name: `${brand} Product Model ${i}`,
-        slug: `product-model-${i}`,
-        description: `This is a premium product from ${brand} brand. Model number ${i} is designed for high efficiency and longevity.`,
-        richContent: `<p>Detail specifications for <strong>${brand} Product Model ${i}</strong>:</p><ul><li>High quality materials</li><li>Advanced technology</li><li>Eco-friendly components</li><li>Standard 2-year warranty included</li></ul>`,
+        name: `${brand} ${shoeType} Model ${i}`,
+        slug: `shoe-model-${i}`,
+        description: `This is a premium ${shoeType.toLowerCase()} from ${brand}. Model number ${i} is designed for ultimate comfort and style.`,
+        richContent: `<p>Detail specifications for <strong>${brand} ${shoeType} Model ${i}</strong>:</p><ul><li>Premium leather and mesh materials</li><li>Orthopedic insoles</li><li>Slip-resistant outsoles</li><li>Standard 1-year warranty included</li></ul>`,
         price: basePrice,
         compareAtPrice: comparePrice,
         costPrice: costPrice,
@@ -372,21 +375,45 @@ async function main() {
   // 9. CMS Content (Blogs and Categories)
   const blogCat = await prisma.blogCategory.create({
     data: {
-      name: "E-Commerce Tips",
-      slug: "ecommerce-tips",
+      name: "Footwear Guides & Trends",
+      slug: "footwear-guides",
     },
   });
 
-  for (let i = 1; i <= 5; i++) {
+  const blogData = [
+    {
+      title: "Trending Shoes in 2026",
+      slug: "trending-shoes-2026",
+      content: "<p>Discover the top trending shoes this year. From chunky sneakers to elegant loafers, stay ahead of the fashion curve.</p>",
+      metaTitle: "Trending Shoes 2026",
+      metaDescription: "Top trending shoes in 2026.",
+    },
+    {
+      title: "The Benefits of Medicated Shoes",
+      slug: "benefits-medicated-shoes",
+      content: "<p>Medicated shoes provide unmatched support for posture and foot health. Learn why orthopedic footwear is a game changer.</p>",
+      metaTitle: "Medicated Shoes Benefits",
+      metaDescription: "Why you should wear medicated shoes.",
+    },
+    {
+      title: "Ultimate Shoe Size Guide",
+      slug: "ultimate-shoe-size-guide",
+      content: "<p>Finding the perfect fit is crucial. Read our comprehensive shoe size guide to measure your feet accurately and pick the right size.</p>",
+      metaTitle: "Shoe Size Guide",
+      metaDescription: "How to measure your shoe size accurately.",
+    }
+  ];
+
+  for (const blog of blogData) {
     await prisma.blog.create({
       data: {
         categoryId: blogCat.id,
-        title: `E-Commerce Tip Number ${i}: Grow Your Sales`,
-        slug: `ecommerce-tip-${i}-grow-sales`,
-        content: `<p>In this post, we discuss tips and strategies to grow your store sales. Strategy number ${i} revolves around refining user experience and improving site speed.</p>`,
-        authorName: "Store Editor",
-        metaTitle: `Grow Sales Strategy ${i}`,
-        metaDescription: `Learn e-commerce optimization strategy ${i}`,
+        title: blog.title,
+        slug: blog.slug,
+        content: blog.content,
+        authorName: "Shoe Expert",
+        metaTitle: blog.metaTitle,
+        metaDescription: blog.metaDescription,
         published: true,
       },
     });
@@ -408,10 +435,10 @@ async function main() {
   await prisma.menuItem.createMany({
     data: [
       { menuId: headerMenu.id, title: "Shop All", url: "/shop", position: 1 },
-      { menuId: headerMenu.id, title: "Apparel", url: "/shop?category=apparel", position: 2 },
-      { menuId: headerMenu.id, title: "Accessories", url: "/shop?category=accessories", position: 3 },
-      { menuId: headerMenu.id, title: "Home Living", url: "/shop?category=living", position: 4 },
-      { menuId: headerMenu.id, title: "FAQ", url: "/faq", position: 5 },
+      { menuId: headerMenu.id, title: "Men", url: "/shop?category=mens-shoes", position: 2 },
+      { menuId: headerMenu.id, title: "Women", url: "/shop?category=womens-shoes", position: 3 },
+      { menuId: headerMenu.id, title: "Medicated", url: "/shop?category=medicated-shoes", position: 4 },
+      { menuId: headerMenu.id, title: "Size Guide", url: "/pages/shoe-size-guide", position: 5 },
     ],
   });
 
@@ -421,7 +448,7 @@ async function main() {
   await prisma.menuItem.createMany({
     data: [
       { menuId: footerMenu.id, title: "Shop All", url: "/shop", position: 1 },
-      { menuId: footerMenu.id, title: "FAQs & Help", url: "/faq", position: 2 },
+      { menuId: footerMenu.id, title: "Size Guide", url: "/pages/shoe-size-guide", position: 2 },
       { menuId: footerMenu.id, title: "Privacy Policy", url: "/privacy", position: 3 },
       { menuId: footerMenu.id, title: "Terms of Service", url: "/terms", position: 4 },
       { menuId: footerMenu.id, title: "Contact Us", url: "/contact", position: 5 },
@@ -432,14 +459,14 @@ async function main() {
   // 11. Store configurations
   await prisma.storeSettings.createMany({
     data: [
-      { key: "store_name", value: "LUMIÈRE" },
-      { key: "store_email", value: "support@lumiere.com" },
-      { key: "store_phone", value: "+1 (800) 555-0199" },
-      { key: "store_address", value: "142 Mercer Street, New York, NY 10012" },
+      { key: "store_name", value: "GAIT" },
+      { key: "store_email", value: "support@gait.pk" },
+      { key: "store_phone", value: "+123456789" },
+      { key: "store_address", value: "Main Market, Pakistan" },
       { key: "store_currency", value: "PKR" },
-      { key: "tagline", value: "Curated premium lifestyle products designed for modern comfort." },
-      { key: "footer_copyright", value: "© 2026 LUMIÈRE Store. All rights reserved." },
-      { key: "footer_description", value: "Curated premium lifestyle products designed for modern comfort. Elevate your everyday aesthetic." },
+      { key: "tagline", value: "Premium Men's & Women's Shoe Brand in Pakistan." },
+      { key: "footer_copyright", value: "© 2026 GAIT. All rights reserved." },
+      { key: "footer_description", value: "Discover GAIT, a trusted shoes brand offering quality footwear crafted for modern style, comfort and everyday confidence." },
       { key: "social_facebook", value: "https://facebook.com" },
       { key: "social_instagram", value: "https://instagram.com" },
       { key: "social_twitter", value: "https://twitter.com" },
@@ -468,6 +495,125 @@ async function main() {
   });
 
   console.log("Store and Theme settings seeded.");
+
+  // 12. Seed Sample Customer Activities for Analytics & Funnels
+  console.log("Seeding Customer Activities...");
+  const sampleActivities = [];
+  const searchTerms = ["running shoes", "sneakers", "leather boots", "casual loafers", "white sneakers", "hiking shoes", "winter boots"];
+  const now = Date.now();
+
+  for (let i = 0; i < customers.length; i++) {
+    const cust = customers[i];
+    const prod = products[i % products.length];
+
+    // Login event
+    sampleActivities.push({
+      type: "LOGIN",
+      userId: cust.id,
+      metadata: { email: cust.email, method: "password" },
+      ipAddress: `192.168.1.${10 + i}`,
+      userAgent: "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7)",
+      createdAt: new Date(now - (i * 3600 * 1000 + 10000)),
+    });
+
+    // Search event
+    sampleActivities.push({
+      type: "SEARCH",
+      userId: cust.id,
+      searchQuery: searchTerms[i % searchTerms.length],
+      metadata: { resultCount: 8 },
+      ipAddress: `192.168.1.${10 + i}`,
+      userAgent: "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7)",
+      createdAt: new Date(now - (i * 3600 * 1000 + 8000)),
+    });
+
+    // Product view event
+    sampleActivities.push({
+      type: "PRODUCT_VIEW",
+      userId: cust.id,
+      productId: prod.id,
+      categoryId: prod.categoryId,
+      metadata: { name: prod.name, slug: prod.slug, price: parseFloat(prod.price.toString()) },
+      ipAddress: `192.168.1.${10 + i}`,
+      userAgent: "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7)",
+      createdAt: new Date(now - (i * 3600 * 1000 + 6000)),
+    });
+
+    // Add to cart event
+    sampleActivities.push({
+      type: "ADD_TO_CART",
+      userId: cust.id,
+      productId: prod.id,
+      metadata: { name: prod.name, quantity: 1, price: parseFloat(prod.price.toString()) },
+      ipAddress: `192.168.1.${10 + i}`,
+      userAgent: "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7)",
+      createdAt: new Date(now - (i * 3600 * 1000 + 4000)),
+    });
+
+    // Initiate checkout event
+    sampleActivities.push({
+      type: "INITIATE_CHECKOUT",
+      userId: cust.id,
+      metadata: { itemCount: 1, total: parseFloat(prod.price.toString()) },
+      ipAddress: `192.168.1.${10 + i}`,
+      userAgent: "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7)",
+      createdAt: new Date(now - (i * 3600 * 1000 + 2000)),
+    });
+
+    // Purchase event for first 3 customers
+    if (i < 3) {
+      sampleActivities.push({
+        type: "PURCHASE",
+        userId: cust.id,
+        metadata: {
+          orderNumber: `ORD-SEED-${1000 + i}`,
+          total: parseFloat(prod.price.toString()),
+          itemCount: 1,
+        },
+        ipAddress: `192.168.1.${10 + i}`,
+        userAgent: "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7)",
+        createdAt: new Date(now - (i * 3600 * 1000 + 500)),
+      });
+    }
+  }
+
+  // Add some guest activities
+  for (let g = 1; g <= 5; g++) {
+    const guestProd = products[(g + 5) % products.length];
+    sampleActivities.push({
+      type: "PAGE_VIEW",
+      sessionId: `guest_sess_${g}`,
+      metadata: { page: "/shop", url: "/shop" },
+      ipAddress: `10.0.0.${g}`,
+      userAgent: "Mozilla/5.0 (Windows NT 10.0; Win64; x64)",
+      createdAt: new Date(now - (g * 7200 * 1000)),
+    });
+    sampleActivities.push({
+      type: "SEARCH",
+      sessionId: `guest_sess_${g}`,
+      searchQuery: searchTerms[(g + 2) % searchTerms.length],
+      metadata: { resultCount: 5 },
+      ipAddress: `10.0.0.${g}`,
+      userAgent: "Mozilla/5.0 (Windows NT 10.0; Win64; x64)",
+      createdAt: new Date(now - (g * 7200 * 1000 - 1000)),
+    });
+    sampleActivities.push({
+      type: "PRODUCT_VIEW",
+      sessionId: `guest_sess_${g}`,
+      productId: guestProd.id,
+      categoryId: guestProd.categoryId,
+      metadata: { name: guestProd.name, slug: guestProd.slug, price: parseFloat(guestProd.price.toString()) },
+      ipAddress: `10.0.0.${g}`,
+      userAgent: "Mozilla/5.0 (Windows NT 10.0; Win64; x64)",
+      createdAt: new Date(now - (g * 7200 * 1000 - 2000)),
+    });
+  }
+
+  await prisma.customerActivity.createMany({
+    data: sampleActivities,
+  });
+
+  console.log(`Seeded ${sampleActivities.length} Customer Activity records.`);
   console.log("Seeding completed successfully!");
 }
 

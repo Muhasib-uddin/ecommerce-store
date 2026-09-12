@@ -135,7 +135,7 @@ export default function StaticPageClient() {
   // 2. RENDER PRIVACY CONTENT
   if (slug === "privacy") {
     return (
-      <div className="mx-auto max-w-3xl px-4 py-16 w-full flex-1 space-y-6 text-sm text-zinc-600 dark:text-zinc-350 leading-relaxed">
+      <div className="mx-auto max-w-3xl px-4 py-16 w-full flex-1 space-y-6 text-sm text-zinc-600 dark:text-zinc-300 leading-relaxed">
         <h1 className="text-3xl font-extrabold text-zinc-950 dark:text-white tracking-tight mb-2">
           Privacy Policy
         </h1>
@@ -168,7 +168,7 @@ export default function StaticPageClient() {
   // 3. RENDER TERMS CONTENT
   if (slug === "terms") {
     return (
-      <div className="mx-auto max-w-3xl px-4 py-16 w-full flex-1 space-y-6 text-sm text-zinc-600 dark:text-zinc-350 leading-relaxed">
+      <div className="mx-auto max-w-3xl px-4 py-16 w-full flex-1 space-y-6 text-sm text-zinc-600 dark:text-zinc-300 leading-relaxed">
         <h1 className="text-3xl font-extrabold text-zinc-950 dark:text-white tracking-tight mb-2">
           Terms of Service
         </h1>
@@ -207,7 +207,7 @@ export default function StaticPageClient() {
           </div>
 
           <div className="space-y-4 pt-6 border-t border-zinc-200 dark:border-zinc-800">
-            <div className="flex items-center gap-4 text-sm text-zinc-650 dark:text-zinc-350">
+            <div className="flex items-center gap-4 text-sm text-zinc-600 dark:text-zinc-300">
               <div className="h-10 w-10 rounded-xl bg-indigo-50 dark:bg-indigo-950/40 text-indigo-600 dark:text-indigo-400 flex items-center justify-center shrink-0">
                 <Mail className="h-5 w-5" />
               </div>
@@ -219,7 +219,7 @@ export default function StaticPageClient() {
               </div>
             </div>
 
-            <div className="flex items-center gap-4 text-sm text-zinc-650 dark:text-zinc-350">
+            <div className="flex items-center gap-4 text-sm text-zinc-600 dark:text-zinc-300">
               <div className="h-10 w-10 rounded-xl bg-indigo-50 dark:bg-indigo-950/40 text-indigo-600 dark:text-indigo-400 flex items-center justify-center shrink-0">
                 <Phone className="h-5 w-5" />
               </div>
@@ -229,7 +229,7 @@ export default function StaticPageClient() {
               </div>
             </div>
 
-            <div className="flex items-center gap-4 text-sm text-zinc-650 dark:text-zinc-350">
+            <div className="flex items-center gap-4 text-sm text-zinc-600 dark:text-zinc-300">
               <div className="h-10 w-10 rounded-xl bg-indigo-50 dark:bg-indigo-950/40 text-indigo-600 dark:text-indigo-400 flex items-center justify-center shrink-0">
                 <MapPin className="h-5 w-5" />
               </div>

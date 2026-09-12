@@ -212,8 +212,8 @@ export default function Footer() {
 
         {/* Bottom copyright & quick links */}
         <div className="border-t border-zinc-200 dark:border-zinc-800 mt-12 pt-8 flex flex-col sm:flex-row items-center justify-between text-xs text-zinc-500 dark:text-zinc-500 gap-4">
-          <p>{footerCopyright || `© ${new Date().getFullYear()} ${storeName || "LUMIÈRE"} Store. All rights reserved.`}</p>
-          <div className="flex space-x-6">
+          <p className="text-center sm:text-left">{footerCopyright || `© ${new Date().getFullYear()} ${storeName || "LUMIÈRE"} Store. All rights reserved.`}</p>
+          <div className="flex flex-wrap justify-center sm:justify-end gap-4 sm:gap-6">
             <Link href="/privacy" className="hover:text-zinc-800 dark:hover:text-zinc-300 transition-colors">
               Privacy Policy
             </Link>

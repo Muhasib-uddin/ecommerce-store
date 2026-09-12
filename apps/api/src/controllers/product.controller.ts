@@ -1,6 +1,7 @@
 import { Request, Response, NextFunction } from 'express';
 import prisma from '../lib/prisma.js';
 import { AppError } from '../middleware/errorHandler.js';
+import { activityService } from '../services/activity.service.js';
 
 /**
  * GET /api/v1/products
@@ -109,6 +110,20 @@ export const getProducts = async (
       prisma.product.count({ where }),
     ]);
 
+    if (search && typeof search === 'string' && search.trim()) {
+      activityService.trackActivity({
+        type: 'SEARCH',
+        userId: req.user?.id || null,
+        searchQuery: (search as string).trim(),
+        metadata: {
+          resultCount: total,
+          category: category || null,
+        },
+        ipAddress: (req.headers['x-forwarded-for'] as string)?.split(',')[0]?.trim() || req.socket.remoteAddress || null,
+        userAgent: req.headers['user-agent'] || null,
+      });
+    }
+
     res.json({
       success: true,
       data: {
@@ -166,6 +181,20 @@ export const getProductBySlug = async (
           orderBy: { createdAt: 'desc' },
         },
       },
+    });
+
+    activityService.trackActivity({
+      type: 'PRODUCT_VIEW',
+      userId: req.user?.id || null,
+      productId: product.id,
+      categoryId: product.categoryId,
+      metadata: {
+        slug: product.slug,
+        name: product.name,
+        price: parseFloat(product.price.toString()),
+      },
+      ipAddress: (req.headers['x-forwarded-for'] as string)?.split(',')[0]?.trim() || req.socket.remoteAddress || null,
+      userAgent: req.headers['user-agent'] || null,
     });
 
     res.json({

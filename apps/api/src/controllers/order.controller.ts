@@ -6,6 +6,7 @@ import crypto from 'crypto';
 import { hashPassword } from '../lib/password.js';
 import { refundPayment } from '../services/stripe.service.js';
 import { sendOrderConfirmationEmail, sendOrderStatusUpdateEmail } from '../services/email.service.js';
+import { activityService } from '../services/activity.service.js';
 
 /**
  * POST /api/v1/orders
@@ -296,6 +297,25 @@ export const createOrder = async (
         console.error('Failed to send order confirmation email:', err);
       }
     }
+
+    // Track customer activity
+    activityService.trackActivity({
+      type: 'PURCHASE',
+      userId: order.userId || userId || null,
+      sessionId: sessionId || null,
+      orderId: order.id,
+      metadata: {
+        orderNumber: order.orderNumber,
+        total: parseFloat(order.total.toString()),
+        subtotal: parseFloat(order.subtotal.toString()),
+        discount: parseFloat(order.discount.toString()),
+        couponCode: order.couponCode || null,
+        paymentMethod: order.paymentMethod,
+        itemCount: order.items?.length || 0,
+      },
+      ipAddress: (req.headers['x-forwarded-for'] as string)?.split(',')[0]?.trim() || req.socket.remoteAddress || null,
+      userAgent: req.headers['user-agent'] || null,
+    });
 
     res.status(201).json({
       success: true,

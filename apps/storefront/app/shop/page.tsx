@@ -6,6 +6,7 @@ import { SlidersHorizontal, ArrowUpDown, ChevronLeft, ChevronRight, RotateCcw } 
 import ProductCard from "@/components/product/ProductCard";
 import { api } from "@/lib/api";
 import { getCurrencyDetails } from "@/lib/currency";
+import { usePageViewTracker } from "@/hooks/useActivityTracker";
 
 const ALL_MOCK_PRODUCTS = [
   {
@@ -97,6 +98,9 @@ function ShopContent() {
   const initialSearch = searchParams.get("search") || "";
   const initialSort = searchParams.get("sort") || "newest";
   const initialPage = parseInt(searchParams.get("page") || "1", 10);
+
+  // Track shop page view
+  usePageViewTracker("Shop", { category: initialCategory });
 
   // Filters State
   const [selectedCategory, setSelectedCategory] = useState(initialCategory);
@@ -314,7 +318,7 @@ function ShopContent() {
                   className={`flex w-full items-center justify-between text-sm py-1.5 px-3 rounded-lg transition-colors text-left ${
                     selectedCategory === cat.slug
                       ? "bg-indigo-50 text-indigo-700 font-semibold dark:bg-indigo-950/40 dark:text-indigo-300"
-                      : "text-zinc-650 hover:bg-zinc-50 dark:text-zinc-400 dark:hover:bg-zinc-900"
+                      : "text-zinc-600 hover:bg-zinc-50 dark:text-zinc-400 dark:hover:bg-zinc-900"
                   }`}
                 >
                   <span>{cat.name}</span>
@@ -334,7 +338,7 @@ function ShopContent() {
                 placeholder="Min"
                 value={minPrice}
                 onChange={(e) => setMinPrice(e.target.value)}
-                className="w-full text-sm border border-zinc-200 dark:border-zinc-850 rounded-lg p-2 bg-transparent text-zinc-900 dark:text-zinc-100 focus:outline-none focus:border-indigo-650"
+                className="w-full text-sm border border-zinc-200 dark:border-zinc-800 rounded-lg p-2 bg-transparent text-zinc-900 dark:text-zinc-100 focus:outline-none focus:border-indigo-600"
               />
               <span className="text-zinc-400 text-xs">to</span>
               <input
@@ -342,7 +346,7 @@ function ShopContent() {
                 placeholder="Max"
                 value={maxPrice}
                 onChange={(e) => setMaxPrice(e.target.value)}
-                className="w-full text-sm border border-zinc-200 dark:border-zinc-850 rounded-lg p-2 bg-transparent text-zinc-900 dark:text-zinc-100 focus:outline-none focus:border-indigo-650"
+                className="w-full text-sm border border-zinc-200 dark:border-zinc-800 rounded-lg p-2 bg-transparent text-zinc-900 dark:text-zinc-100 focus:outline-none focus:border-indigo-600"
               />
             </div>
           </div>
@@ -352,7 +356,7 @@ function ShopContent() {
             <h3 className="text-sm font-bold text-zinc-900 dark:text-zinc-100 uppercase tracking-wider mb-4">
               Availability
             </h3>
-            <label className="flex items-center gap-2.5 cursor-pointer text-sm text-zinc-650 dark:text-zinc-400">
+            <label className="flex items-center gap-2.5 cursor-pointer text-sm text-zinc-600 dark:text-zinc-400">
               <input
                 type="checkbox"
                 checked={inStockOnly}
@@ -386,7 +390,7 @@ function ShopContent() {
           {/* Reset Filters */}
           <button
             onClick={handleClearFilters}
-            className="flex items-center justify-center gap-2 text-xs font-bold text-zinc-550 hover:text-red-600 dark:text-zinc-450 dark:hover:text-red-400 w-full pt-4 border-t border-zinc-200 dark:border-zinc-800 transition-colors"
+            className="flex items-center justify-center gap-2 text-xs font-bold text-zinc-500 hover:text-red-600 dark:text-zinc-400 dark:hover:text-red-400 w-full pt-4 border-t border-zinc-200 dark:border-zinc-800 transition-colors"
           >
             <RotateCcw className="h-3.5 w-3.5" />
             <span>Reset All Filters</span>
@@ -443,7 +447,7 @@ function ShopContent() {
                       className={`h-8 w-8 text-xs font-bold rounded-full transition-all ${
                         currentPage === i + 1
                           ? "bg-indigo-600 text-white shadow-xs"
-                          : "text-zinc-650 hover:bg-white dark:hover:bg-zinc-900"
+                          : "text-zinc-600 hover:bg-white dark:hover:bg-zinc-900"
                       }`}
                     >
                       {i + 1}
@@ -492,7 +496,7 @@ function ShopContent() {
                         }}
                         className={`text-xs px-3 py-1.5 rounded-full border transition-all ${
                           selectedCategory === cat.slug
-                            ? "bg-indigo-650 border-indigo-650 text-white"
+                            ? "bg-indigo-600 border-indigo-600 text-white"
                             : "border-zinc-200 dark:border-zinc-800 text-zinc-700 dark:text-zinc-300"
                         }`}
                       >
@@ -526,7 +530,7 @@ function ShopContent() {
 
                 <div>
                   <h3 className="text-xs font-bold text-zinc-400 uppercase tracking-wider mb-3">Availability</h3>
-                  <label className="flex items-center gap-2.5 cursor-pointer text-sm text-zinc-650 dark:text-zinc-400">
+                  <label className="flex items-center gap-2.5 cursor-pointer text-sm text-zinc-600 dark:text-zinc-400">
                     <input
                       type="checkbox"
                       checked={inStockOnly}

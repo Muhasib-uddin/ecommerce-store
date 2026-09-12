@@ -135,7 +135,7 @@ function ResetPasswordContent() {
 
             {/* Password Validation Indicators */}
             {newPassword && (
-              <div className="grid grid-cols-2 gap-2 text-[11px] bg-zinc-50 dark:bg-zinc-900/50 p-3 rounded-xl border border-zinc-150 dark:border-zinc-850">
+              <div className="grid grid-cols-2 gap-2 text-[11px] bg-zinc-50 dark:bg-zinc-900/50 p-3 rounded-xl border border-zinc-150 dark:border-zinc-800">
                 <div className={`flex items-center gap-1.5 ${hasMinLength ? "text-emerald-600 dark:text-emerald-400" : "text-zinc-400"}`}>
                   {hasMinLength ? <Check className="h-3.5 w-3.5" /> : <X className="h-3.5 w-3.5" />}
                   <span>8+ characters</span>
@@ -204,3 +204,4 @@ export default function ResetPasswordPage() {
     </Suspense>
   );
 }
+

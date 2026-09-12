@@ -7,9 +7,9 @@ export interface TokenPayload {
 }
 
 const getAccessSecret = (): string => {
-  const secret = process.env.JWT_ACCESS_SECRET;
+  const secret = process.env.JWT_ACCESS_SECRET || process.env.JWT_SECRET;
   if (!secret) {
-    throw new Error('JWT_ACCESS_SECRET environment variable is not set');
+    throw new Error('JWT_ACCESS_SECRET (or JWT_SECRET) environment variable is not set');
   }
   return secret;
 };

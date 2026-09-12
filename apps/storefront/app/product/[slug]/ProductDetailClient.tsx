@@ -18,6 +18,7 @@ import { api } from "@/lib/api";
 import { formatPrice } from "@/lib/currency";
 import { useCart } from "@/hooks/useCart";
 import { useSettings } from "@/hooks/useSettings";
+import { useActivityTracker } from "@/hooks/useActivityTracker";
 
 export default function ProductDetailClient() {
   const params = useParams();
@@ -26,6 +27,7 @@ export default function ProductDetailClient() {
 
   const { storeName } = useSettings();
   const { addItem } = useCart();
+  const { track } = useActivityTracker();
 
   const [product, setProduct] = useState<any>(null);
   const [selectedImage, setSelectedImage] = useState<string>("");
@@ -48,6 +50,18 @@ export default function ProductDetailClient() {
           if (prod.variants && prod.variants.length > 0) {
             setSelectedVariant(prod.variants[0]);
           }
+
+          // Track product view
+          track({
+            type: "PRODUCT_VIEW",
+            productId: prod.id,
+            categoryId: prod.categoryId,
+            metadata: {
+              slug: prod.slug,
+              name: prod.name,
+              price: prod.price,
+            },
+          });
         }
       } catch (err) {
         console.warn("Failed to load product detail from API, using fallback:", err);
@@ -56,7 +70,7 @@ export default function ProductDetailClient() {
       }
     }
     loadProduct();
-  }, [slug]);
+  }, [slug, track]);
 
   const handleAddToCart = async () => {
     const targetProd = product || currentProduct;
@@ -71,6 +85,17 @@ export default function ProductDetailClient() {
       );
       setAdded(true);
       setTimeout(() => setAdded(false), 2000);
+
+      track({
+        type: "ADD_TO_CART",
+        productId: targetProd.id,
+        metadata: {
+          name: targetProd.name,
+          quantity,
+          variantId: selectedVariant?.id || null,
+          price: targetProd.price,
+        },
+      });
     } catch (err) {
       console.error("Failed to add to cart:", err);
     }

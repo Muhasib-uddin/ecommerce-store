@@ -213,3 +213,40 @@ export const moderateRealReview = (id, data) =>
   put(`/api/v1/reviews/${id}/moderate`, data).then(
     (res) => res.data?.review || res.data || res
   );
+
+// ============================================================
+// Customer Activity Tracking & Analytics
+// ============================================================
+
+export const getRealActivities = (params) => {
+  const query = new URLSearchParams(params || {}).toString();
+  return get(`/api/v1/activities${query ? `?${query}` : ""}`).then(
+    (res) => res.data || res
+  );
+};
+
+export const getRealLiveActivities = (limit = 50) =>
+  get(`/api/v1/activities/live?limit=${limit}`).then(
+    (res) => res.data || res
+  );
+
+export const getRealActivityStats = (timeRange = "30d") =>
+  get(`/api/v1/activities/stats?timeRange=${timeRange}`).then(
+    (res) => res.data || res
+  );
+
+export const getRealConversionFunnel = (timeRange = "30d") =>
+  get(`/api/v1/activities/funnel?timeRange=${timeRange}`).then(
+    (res) => res.data || res
+  );
+
+export const getRealTopSearches = (timeRange = "30d", limit = 20) =>
+  get(`/api/v1/activities/searches?timeRange=${timeRange}&limit=${limit}`).then(
+    (res) => res.data || res
+  );
+
+export const getRealCustomerJourney = (userId, limit = 100) =>
+  get(`/api/v1/activities/customer/${userId}?limit=${limit}`).then(
+    (res) => res.data || res
+  );
+

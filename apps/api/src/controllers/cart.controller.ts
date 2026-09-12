@@ -3,6 +3,7 @@ import prisma from '../lib/prisma.js';
 import { AppError } from '../middleware/errorHandler.js';
 import crypto from 'crypto';
 import { metaCapiService } from '../services/meta-capi.service.js';
+import { activityService } from '../services/activity.service.js';
 
 /**
  * Helper: Find or create cart for user or session.
@@ -222,6 +223,21 @@ export const addToCart = async (
         fbp: req.cookies?._fbp,
         fbc: req.cookies?._fbc,
       }).catch(e => console.error('Meta CAPI AddToCart error:', e));
+
+      activityService.trackActivity({
+        type: 'ADD_TO_CART',
+        userId: req.user?.id || null,
+        sessionId,
+        productId,
+        metadata: {
+          variantId: productVariantId || null,
+          quantity,
+          isUpdate: true,
+          price: parseFloat(product.price.toString()),
+        },
+        ipAddress: (req.headers['x-forwarded-for'] as string)?.split(',')[0]?.trim() || req.socket.remoteAddress || null,
+        userAgent: req.headers['user-agent'] || null,
+      });
     } else {
       const newItem = await prisma.cartItem.create({
         data: {
@@ -252,6 +268,20 @@ export const addToCart = async (
         fbp: req.cookies?._fbp,
         fbc: req.cookies?._fbc,
       }).catch(e => console.error('Meta CAPI AddToCart error:', e));
+
+      activityService.trackActivity({
+        type: 'ADD_TO_CART',
+        userId: req.user?.id || null,
+        sessionId,
+        productId,
+        metadata: {
+          variantId: productVariantId || null,
+          quantity,
+          price: parseFloat(product.price.toString()),
+        },
+        ipAddress: (req.headers['x-forwarded-for'] as string)?.split(',')[0]?.trim() || req.socket.remoteAddress || null,
+        userAgent: req.headers['user-agent'] || null,
+      });
     }
   } catch (error) {
     next(error);
@@ -300,6 +330,20 @@ export const updateCartItem = async (
       data: { quantity },
     });
 
+    activityService.trackActivity({
+      type: 'UPDATE_CART',
+      userId: req.user?.id || null,
+      productId: cartItem.productId,
+      metadata: {
+        cartItemId: id,
+        productVariantId: cartItem.productVariantId,
+        oldQuantity: cartItem.quantity,
+        newQuantity: quantity,
+      },
+      ipAddress: (req.headers['x-forwarded-for'] as string)?.split(',')[0]?.trim() || req.socket.remoteAddress || null,
+      userAgent: req.headers['user-agent'] || null,
+    });
+
     res.json({
       success: true,
       data: {
@@ -333,6 +377,19 @@ export const removeFromCart = async (
 
     await prisma.cartItem.delete({
       where: { id },
+    });
+
+    activityService.trackActivity({
+      type: 'REMOVE_FROM_CART',
+      userId: req.user?.id || null,
+      productId: cartItem.productId,
+      metadata: {
+        cartItemId: id,
+        productVariantId: cartItem.productVariantId,
+        removedQuantity: cartItem.quantity,
+      },
+      ipAddress: (req.headers['x-forwarded-for'] as string)?.split(',')[0]?.trim() || req.socket.remoteAddress || null,
+      userAgent: req.headers['user-agent'] || null,
     });
 
     res.json({
