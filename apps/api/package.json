@@ -28,6 +28,7 @@
     "jsonwebtoken": "^9.0.2",
     "node-cron": "^4.2.1",
     "nodemailer": "^10.0.3",
+    "prisma": "^5.10.0",
     "redis": "^4.6.13",
     "resend": "^6.12.4",
     "stripe": "^22.1.1",
@@ -43,7 +44,6 @@
     "@types/nodemailer": "^8.0.1",
     "@types/paypal__checkout-server-sdk": "^1.0.8",
     "nodemon": "^3.1.0",
-    "prisma": "^5.10.0",
     "ts-node": "^10.9.2",
     "typescript": "^5.3.3"
   },
