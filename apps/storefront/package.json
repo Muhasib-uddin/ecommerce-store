@@ -10,7 +10,6 @@
   },
   "dependencies": {
     "@paypal/react-paypal-js": "^9.2.0",
-    "@repo/shared": "*",
     "@stripe/react-stripe-js": "^6.4.0",
     "@stripe/stripe-js": "^9.6.0",
     "lucide-react": "^0.451.0",

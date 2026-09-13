@@ -2,7 +2,20 @@
 
 import { useCallback, useEffect, useRef } from "react";
 import { api } from "../lib/api";
-import { CustomerActivityType } from "@repo/shared";
+export type CustomerActivityType =
+  | "PAGE_VIEW"
+  | "PRODUCT_VIEW"
+  | "CATEGORY_VIEW"
+  | "SEARCH"
+  | "ADD_TO_CART"
+  | "REMOVE_FROM_CART"
+  | "INITIATE_CHECKOUT"
+  | "PURCHASE_SUCCESS"
+  | "PURCHASE_FAILED"
+  | "WISHLIST_ADD"
+  | "WISHLIST_REMOVE"
+  | "COUPON_APPLIED"
+  | "COUPON_REMOVED";
 
 interface TrackOptions {
   type: CustomerActivityType;
