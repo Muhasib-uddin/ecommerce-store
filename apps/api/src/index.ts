@@ -34,11 +34,40 @@ const port = process.env.PORT || 5000;
 
 // Security
 app.use(helmet());
+// Allowed CORS origins (supports apex, www variants, and comma-separated lists)
+const rawOrigins = [
+  ...(process.env.FRONTEND_URL ? process.env.FRONTEND_URL.split(',').map((u) => u.trim()) : ['http://localhost:3000']),
+  ...(process.env.ADMIN_URL ? process.env.ADMIN_URL.split(',').map((u) => u.trim()) : ['http://localhost:5173']),
+];
+
+const allowedOrigins = new Set<string>();
+rawOrigins.forEach((origin) => {
+  if (!origin) return;
+  allowedOrigins.add(origin);
+  try {
+    const parsed = new URL(origin);
+    if (parsed.hostname.startsWith('www.')) {
+      const apex = `${parsed.protocol}//${parsed.hostname.replace(/^www\./, '')}${parsed.port ? `:${parsed.port}` : ''}`;
+      allowedOrigins.add(apex);
+    } else if (!parsed.hostname.includes('localhost') && !parsed.hostname.match(/^\d+\.\d+\.\d+\.\d+$/)) {
+      const withWww = `${parsed.protocol}//www.${parsed.hostname}${parsed.port ? `:${parsed.port}` : ''}`;
+      allowedOrigins.add(withWww);
+    }
+  } catch {
+    // Ignore invalid URL strings
+  }
+});
+
 app.use(cors({
-  origin: [
-    process.env.FRONTEND_URL || 'http://localhost:3000',
-    process.env.ADMIN_URL || 'http://localhost:5173',
-  ],
+  origin: (origin, callback) => {
+    if (!origin || allowedOrigins.has(origin)) {
+      return callback(null, true);
+    }
+    if (process.env.NODE_ENV !== 'production' && origin.includes('localhost')) {
+      return callback(null, true);
+    }
+    callback(new Error(`CORS policy does not allow access from origin: ${origin}`));
+  },
   credentials: true,
 }));
 
